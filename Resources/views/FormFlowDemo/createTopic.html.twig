@@ -1,0 +1,73 @@
+{% extends 'CraueFormFlowDemoBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+
+	{% stylesheets
+		'@CraueFormFlowBundle/Resources/assets/css/buttons.css'
+		'@CraueFormFlowDemoBundle/Resources/assets/css/form-flow.css'
+		filter='?yui_css'
+		output='css/form-flow.css'
+	%}
+		<link type="text/css" rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+	<div class="back-link">
+		<a href="{{ path('_FormFlow_start') }}">{{ 'back' | trans }}</a>
+	</div>
+
+	{% block headline %}
+		<h1>{{ 'formFlow.demo' | trans }}: {{ 'formFlow.demo.topicFlow.title' | trans }}</h1>
+	{% endblock %}
+
+	<div class="flow-steps">
+		{{- 'steps' | trans }}: {% include 'CraueFormFlowBundle:FormFlow:stepList.html.twig' -%}
+	</div>
+
+	<form class="flow-form" method="post" action="{{ path(app.request.attributes.get('_route'),
+			app.request.attributes.get('_route_params') | craue_removeDynamicStepNavigationParameter(flow)) }}" {{ form_enctype(form) }}>
+		<fieldset>
+			<legend>{{ 'step' | trans }} {{ flow.getCurrentStepNumber() }}: {{ flow.getCurrentStepLabel() | trans }}</legend>
+			{% include 'CraueFormFlowBundle:FormFlow:stepField.html.twig' %}
+
+			{{ form_errors(form) }}
+
+			{% if flow.getCurrentStepNumber() == 3 %}
+				{{ 'bug_details_intro' | trans }}
+				<br /><br />
+				{{ form_row(form.details) }}
+			{% endif %}
+
+			{% if flow.getCurrentStepNumber() == 4 %}
+				{{ 'confirmation_intro' | trans }}
+				<br />
+				<dl>
+					<dt>{{ 'title' | trans }}:</dt>
+					<dd>{{ formData.title | craue_default }}</dd>
+
+					<dt>{{ 'description' | trans }}:</dt>
+					<dd>{{ formData.description | craue_default }}</dd>
+
+					<dt>{{ 'category' | trans }}:</dt>
+					<dd>{{ formData.category | trans({}, 'topicCategories') | craue_default }}</dd>
+
+					<dt>{{ 'comment' | trans }}:</dt>
+					<dd>{{ formData.comment | nl2br | craue_default }}</dd>
+
+					{% if formData.isBugReport() %}
+						<dt>{{ 'details' | trans }}:</dt>
+						<dd>{{ formData.details | nl2br | craue_default }}</dd>
+					{% endif %}
+				</dl>
+			{% endif %}
+
+			{{ form_rest(form) }}
+		</fieldset>
+
+		{% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
+	</form>
+
+	<div class="clear"></div>
+{% endblock %}

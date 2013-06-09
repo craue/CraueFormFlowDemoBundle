@@ -1,0 +1,32 @@
+.craue_formflow_steplist li {
+	line-height: 1.5em;
+}
+.craue_formflow_steplist li.craue_formflow_skipped_step {
+	text-decoration: line-through;
+}
+.craue_formflow_steplist li.craue_formflow_done_step:after {
+	content: ' \2713';
+}
+.craue_formflow_steplist li.craue_formflow_current_step {
+	font-weight: bold;
+}
+
+.craue_formflow_buttons {
+	float: left;
+	margin-top: 10px;
+}
+
+.flow-steps {
+	float: left;
+	padding: 20px;
+	padding-right: 50px;
+	padding-bottom: 400px;
+	background-color: #DBDCF4;
+}
+
+.flow-form {
+	float: left;
+	width: 600px;
+	margin-top: 10px;
+	margin-left: 10px;
+}

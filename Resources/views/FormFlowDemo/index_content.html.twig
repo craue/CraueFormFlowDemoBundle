@@ -1,0 +1,29 @@
+<h1>{{ 'formFlow.demo' | trans }}</h1>
+<ul>
+	<li>
+		<a href="{{ path('_FormFlow_createLocation') }}">
+			{{- 'formFlow.demo.locationFlow.title' | trans -}}
+		</a>
+	</li>
+	<li>
+		<a href="{{ path('_FormFlow_createVehicle') }}">
+			{{- 'formFlow.demo.vehicleFlow.title' | trans -}}
+		</a>
+	</li>
+	<li>
+		<a href="{{ path('_FormFlow_createTopic') }}">
+			{{- 'formFlow.demo.topicFlow.title' | trans -}}
+		</a>
+	</li>
+	<li>
+		<a href="{{ path('_FormFlow_createTopic_dynamicStepNavigation_start') }}">
+			{{- 'formFlow.demo.topicFlowWithDsn.title' | trans -}}
+		</a>
+	</li>
+	<li style="margin-top: 20px;">
+		{%- set sourceUrl = 'https://github.com/craue/CraueFormFlowDemoBundle' -%}
+		{{- 'code_available_at' | trans({
+				'%url%': '<a href="' ~ sourceUrl ~ '">' ~ sourceUrl ~ '</a>',
+			}) | raw -}}
+	</li>
+</ul>

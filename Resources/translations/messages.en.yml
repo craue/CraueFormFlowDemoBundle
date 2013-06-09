@@ -1,0 +1,35 @@
+back: back
+form_field_required: required field
+step: step
+steps: steps
+code_available_at: The source code of this demo is available at %url%.
+
+# headlines
+formFlow.demo: CraueFormFlowBundle demo
+formFlow.demo.locationFlow.title: create a location (three steps)
+formFlow.demo.vehicleFlow.title: create a vehicle (three steps)
+formFlow.demo.topicFlow.title: create a topic (four steps)
+formFlow.demo.topicFlowWithDsn.title: create a topic (four steps, with dynamic step navigation)
+
+# steps
+basics: basics
+comment: comment
+bug_details: bug details
+wheels: wheels
+confirmation: confirmation
+
+# fields
+title: title
+description: description
+category: category
+details: details
+country: country
+region: region
+numberOfWheels: number of wheels
+engine: engine
+
+# explanations
+bug_details_intro: Since this will be a bug report, you should describe the bug in detail.
+country_intro: For the top countries you have to choose the region in the next step.
+wheels_intro: When selecting four wheels you have to choose the engine in the next step.
+confirmation_intro: Make sure that all information is correct. If not, go back to make changes.

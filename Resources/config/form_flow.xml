@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	Author: Christian Raue <christian.raue@gmail.com>
+	Copyright: 2011-2013 Christian Raue
+	License: http://opensource.org/licenses/mit-license.php MIT License
+-->
+<container xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<services>
+		<service id="craueFormFlowDemoBundle.form.flow.createTopic"
+				class="Craue\FormFlowDemoBundle\Form\CreateTopicFlow"
+				parent="craue.form.flow"
+				scope="request">
+		</service>
+
+		<service id="craueFormFlowDemoBundle.form.flow.createLocation"
+				class="Craue\FormFlowDemoBundle\Form\CreateLocationFlow"
+				parent="craue.form.flow"
+				scope="request">
+		</service>
+
+		<service id="craueFormFlowDemoBundle.form.flow.createVehicle"
+				class="Craue\FormFlowDemoBundle\Form\CreateVehicleFlow"
+				parent="craue.form.flow"
+				scope="request">
+			<call method="setFormType">
+				<argument type="service" id="craueFormFlowDemoBundle.form.createVehicle" />
+			</call>
+		</service>
+	</services>
+</container>

@@ -1,0 +1,35 @@
+back: zurück
+form_field_required: Pflichtfeld
+step: Schritt
+steps: Schritte
+code_available_at: Der Quellcode dieser Demo steht unter %url% zur Verfügung.
+
+# headlines
+formFlow.demo: CraueFormFlowBundle-Demo
+formFlow.demo.locationFlow.title: Standort erstellen (drei Schritte)
+formFlow.demo.vehicleFlow.title: Fahrzeug erstellen (drei Schritte)
+formFlow.demo.topicFlow.title: Beitrag erstellen (vier Schritte)
+formFlow.demo.topicFlowWithDsn.title: Beitrag erstellen (vier Schritte, mit dynamischer Schrittnavigation)
+
+# steps
+basics: Grundsätzliches
+comment: Kommentar
+bug_details: Fehlerdetails
+wheels: Räder
+confirmation: Bestätigung
+
+# fields
+title: Titel
+description: Beschreibung
+category: Kategorie
+details: Details
+country: Land
+region: Region
+numberOfWheels: Anzahl der Räder
+engine: Motor
+
+# explanations
+bug_details_intro: Da dies ein Fehlerbericht wird, sollten Sie den Fehler möglichst detailliert beschreiben.
+country_intro: Für die oberen Länder muss im nächsten Schritt noch die Region gewählt werden.
+wheels_intro: Im Fall von vier Rädern muss im nächsten Schritt noch der Motor gewählt werden.
+confirmation_intro: Prüfen Sie genau, ob alle Angaben korrekt sind. Falls nicht, gehen Sie zurück, um Änderungen vorzunehmen.

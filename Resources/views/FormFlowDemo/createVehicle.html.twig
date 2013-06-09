@@ -1,0 +1,62 @@
+{% extends 'CraueFormFlowDemoBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+
+	{% stylesheets
+		'@CraueFormFlowBundle/Resources/assets/css/buttons.css'
+		'@CraueFormFlowDemoBundle/Resources/assets/css/form-flow.css'
+		filter='?yui_css'
+		output='css/form-flow.css'
+	%}
+		<link type="text/css" rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+	<div class="back-link">
+		<a href="{{ path('_FormFlow_start') }}">{{ 'back' | trans }}</a>
+	</div>
+
+	<h1>{{ 'formFlow.demo' | trans }}: {{ 'formFlow.demo.vehicleFlow.title' | trans }}</h1>
+
+	<div class="flow-steps">
+		{{- 'steps' | trans }}: {% include 'CraueFormFlowBundle:FormFlow:stepList.html.twig' -%}
+	</div>
+
+	<form class="flow-form" method="post" action="{{ path(app.request.attributes.get('_route'),
+			app.request.attributes.get('_route_params')) }}" {{ form_enctype(form) }}>
+		<fieldset>
+			<legend>{{ 'step' | trans }} {{ flow.getCurrentStepNumber() }}: {{ flow.getCurrentStepLabel() | trans }}</legend>
+			{% include 'CraueFormFlowBundle:FormFlow:stepField.html.twig' %}
+
+			{{ form_errors(form) }}
+
+			{% if flow.getCurrentStepNumber() == 1 %}
+				{{ 'wheels_intro' | trans }}
+				<br /><br />
+				{{ form_row(form.numberOfWheels) }}
+			{% endif %}
+
+			{% if flow.getCurrentStepNumber() == 3 %}
+				{{ 'confirmation_intro' | trans }}
+				<br />
+				<dl>
+					<dt>{{ 'wheels' | trans }}:</dt>
+					<dd>{{ formData.numberOfWheels }}</dd>
+
+					{% if formData.engine is not empty %}
+						<dt>{{ 'engine' | trans }}:</dt>
+						<dd>{{ formData.engine | trans({}, 'vehicleEngines') }}</dd>
+					{% endif %}
+				</dl>
+			{% endif %}
+
+			{{ form_rest(form) }}
+		</fieldset>
+
+		{% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
+	</form>
+
+	<div class="clear"></div>
+{% endblock %}

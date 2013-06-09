@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	Author: Christian Raue <christian.raue@gmail.com>
+	Copyright: 2011-2013 Christian Raue
+	License: http://opensource.org/licenses/mit-license.php MIT License
+-->
+<container xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<services>
+		<service id="craueFormFlowDemoBundle.form.type.topicCategory"
+				class="Craue\FormFlowDemoBundle\Form\Type\TopicCategoryType">
+			<tag name="form.type" alias="form_type_topicCategory" />
+			<call method="setChoiceList">
+				<argument type="service" id="craueFormFlowDemoBundle.form.choicelist.topicCategory" />
+			</call>
+		</service>
+
+		<service id="craueFormFlowDemoBundle.form.type.locationRegion"
+				class="Craue\FormFlowDemoBundle\Form\Type\LocationRegionType">
+			<tag name="form.type" alias="form_type_locationRegion" />
+			<call method="setTranslator">
+				<argument type="service" id="translator" />
+			</call>
+		</service>
+
+		<service id="craueFormFlowDemoBundle.form.createVehicle"
+				class="Craue\FormFlowDemoBundle\Form\CreateVehicleForm">
+			<tag name="form.type" alias="createVehicle" />
+		</service>
+
+		<service id="craueFormFlowDemoBundle.form.type.vehicleEngine"
+				class="Craue\FormFlowDemoBundle\Form\Type\VehicleEngineType">
+			<tag name="form.type" alias="form_type_vehicleEngine" />
+			<call method="setChoiceList">
+				<argument type="service" id="craueFormFlowDemoBundle.form.choicelist.vehicleEngine" />
+			</call>
+		</service>
+	</services>
+</container>

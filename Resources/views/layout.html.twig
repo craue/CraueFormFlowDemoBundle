@@ -1,0 +1,13 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+	<head>
+		<title>CraueFormFlowDemoBundle</title>
+		<meta charset="{{ _charset }}" />
+		{% block stylesheets %}{% endblock %}
+	</head>
+	<body>
+		{% block content %}{% endblock %}
+	</body>
+</html>
+{% endspaceless %}

@@ -1,0 +1,27 @@
+{
+	"name": "craue/formflow-demo-bundle",
+	"type": "symfony-bundle",
+	"description": "Example code showcasing the features of CraueFormFlowBundle.",
+	"keywords": ["symfony2", "form"],
+	"homepage": "https://github.com/craue/CraueFormFlowDemoBundle",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Christian Raue",
+			"email": "christian.raue@gmail.com"
+		}
+	],
+	"require": {
+		"craue/formflow-bundle": "~2.0.0",
+		"doctrine/orm": "~2.3.0",
+		"sensio/framework-extra-bundle": "~2.1",
+		"symfony/assetic-bundle": "~2.1",
+		"symfony/symfony": "~2.1"
+	},
+	"autoload": {
+		"psr-0": {
+			"Craue\\FormFlowDemoBundle": ""
+		}
+	},
+	"target-dir": "Craue/FormFlowDemoBundle"
+}
