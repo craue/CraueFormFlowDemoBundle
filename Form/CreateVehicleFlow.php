@@ -49,7 +49,6 @@ class CreateVehicleFlow extends FormFlow {
 			),
 			array(
 				'label' => 'confirmation',
-				'type' => $this->formType, // needed to avoid InvalidOptionsException regarding option 'flowStep'
 			),
 		);
 	}
@@ -61,7 +60,6 @@ class CreateVehicleFlow extends FormFlow {
 		$options = parent::getFormOptions($step, $options);
 
 		$options['cascade_validation'] = true;
-		$options['flowStep'] = $step;
 
 		return $options;
 	}

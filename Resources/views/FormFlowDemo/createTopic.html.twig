@@ -30,8 +30,6 @@
 			app.request.attributes.get('_route_params') | craue_removeDynamicStepNavigationParameter(flow)) }}" {{ form_enctype(form) }}>
 		<fieldset>
 			<legend>{{ 'step' | trans }} {{ flow.getCurrentStepNumber() }}: {{ flow.getCurrentStepLabel() | trans }}</legend>
-			{% include 'CraueFormFlowBundle:FormFlow:stepField.html.twig' %}
-
 			{{ form_errors(form) }}
 
 			{% if flow.getCurrentStepNumber() == 3 %}

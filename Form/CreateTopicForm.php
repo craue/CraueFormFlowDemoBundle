@@ -20,7 +20,7 @@ class CreateTopicForm extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$isBugReport = $options['isBugReport'];
 
-		switch ($options['flowStep']) {
+		switch ($options['flow_step']) {
 			case 1:
 				$builder->add('title');
 				$builder->add('description', null, array(
@@ -46,7 +46,6 @@ class CreateTopicForm extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
-			'flowStep' => 1,
 			'data' => new Topic(),
 			'isBugReport' => false,
 		));
