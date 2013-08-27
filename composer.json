@@ -12,7 +12,7 @@
 		}
 	],
 	"require": {
-		"craue/formflow-bundle": "~2.0",
+		"craue/formflow-bundle": "~2.1.0",
 		"doctrine/orm": "~2.3.0",
 		"sensio/framework-extra-bundle": "~2.1",
 		"symfony/assetic-bundle": "~2.1",
