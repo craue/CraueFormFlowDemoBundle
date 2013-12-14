@@ -7,9 +7,9 @@ code_available_at: The source code of this demo is available at %url%.
 # headlines
 formFlow.demo: CraueFormFlowBundle demo
 formFlow.demo.locationFlow.title: create a location (three steps)
-formFlow.demo.vehicleFlow.title: create a vehicle (five steps with two related entities)
+formFlow.demo.vehicleFlow.title: create a vehicle (five steps, two related entities)
 formFlow.demo.topicFlow.title: create a topic (four steps)
-formFlow.demo.topicFlowWithDsn.title: create a topic (four steps, with dynamic step navigation)
+formFlow.demo.topicFlowWithDsn.title: create a topic (four steps, dynamic step navigation)
 
 # steps
 basics: basics
