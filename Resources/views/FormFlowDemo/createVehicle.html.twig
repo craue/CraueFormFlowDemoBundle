@@ -33,21 +33,46 @@
 			{% if flow.getCurrentStepNumber() == 1 %}
 				{{ 'wheels_intro' | trans }}
 				<br /><br />
-				{{ form_row(form.numberOfWheels) }}
+				{{ form_row(form.vehicle.numberOfWheels) }}
+			{% endif %}
+
+			{% if flow.getCurrentStepNumber() == 2 %}
+				{{ form_row(form.vehicle.engine) }}
 			{% endif %}
 
 			{% if flow.getCurrentStepNumber() == 3 %}
+				{{ form_row(form.addDriver) }}
+			{% endif %}
+
+			{% if flow.getCurrentStepNumber() == 4 %}
+				{{ form_row(form.driver.firstname) }}
+				{{ form_row(form.driver.lastname) }}
+			{% endif %}
+
+			{% if flow.getCurrentStepNumber() == 5 %}
 				{{ 'confirmation_intro' | trans }}
-				<br />
+				<br /><br />
+				<b>{{ 'vehicle' | trans }}</b>
 				<dl>
 					<dt>{{ 'wheels' | trans }}:</dt>
-					<dd>{{ formData.numberOfWheels }}</dd>
+					<dd>{{ formData.vehicle.numberOfWheels }}</dd>
 
-					{% if formData.engine is not empty %}
+					{% if formData.vehicle.engine is not empty %}
 						<dt>{{ 'engine' | trans }}:</dt>
-						<dd>{{ formData.engine | trans({}, 'vehicleEngines') }}</dd>
+						<dd>{{ formData.vehicle.engine | trans({}, 'vehicleEngines') }}</dd>
 					{% endif %}
 				</dl>
+
+				{% if formData.addDriver %}
+					<b>{{ 'driver' | trans }}</b>
+					<dl>
+						<dt>{{ 'firstname' | trans }}:</dt>
+						<dd>{{ formData.driver.firstname }}</dd>
+
+						<dt>{{ 'lastname' | trans }}:</dt>
+						<dd>{{ formData.driver.lastname }}</dd>
+					</dl>
+				{% endif %}
 			{% endif %}
 
 			{{ form_rest(form) }}

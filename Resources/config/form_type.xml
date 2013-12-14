@@ -37,5 +37,15 @@
 				<argument type="service" id="craueFormFlowDemoBundle.form.choicelist.vehicleEngine" />
 			</call>
 		</service>
+
+		<service id="craueFormFlowDemoBundle.form.type.vehicleWheels"
+				class="Craue\FormFlowDemoBundle\Form\Type\VehicleWheelsType">
+			<tag name="form.type" alias="form_type_vehicleWheels" />
+		</service>
+
+		<service id="craueFormFlowDemoBundle.form.type.driver"
+				class="Craue\FormFlowDemoBundle\Form\Type\DriverType">
+			<tag name="form.type" alias="form_type_driver" />
+		</service>
 	</services>
 </container>

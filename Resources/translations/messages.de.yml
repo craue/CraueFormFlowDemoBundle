@@ -7,7 +7,7 @@ code_available_at: Der Quellcode dieser Demo steht unter %url% zur Verfügung.
 # headlines
 formFlow.demo: CraueFormFlowBundle-Demo
 formFlow.demo.locationFlow.title: Standort erstellen (drei Schritte)
-formFlow.demo.vehicleFlow.title: Fahrzeug erstellen (drei Schritte)
+formFlow.demo.vehicleFlow.title: Fahrzeug erstellen (fünf Schritte mit zwei verknüpften Objekten)
 formFlow.demo.topicFlow.title: Beitrag erstellen (vier Schritte)
 formFlow.demo.topicFlowWithDsn.title: Beitrag erstellen (vier Schritte, mit dynamischer Schrittnavigation)
 
@@ -15,7 +15,10 @@ formFlow.demo.topicFlowWithDsn.title: Beitrag erstellen (vier Schritte, mit dyna
 basics: Grundsätzliches
 comment: Kommentar
 bug_details: Fehlerdetails
+vehicle: Fahrzeug
 wheels: Räder
+driver: Fahrer
+driverDetails: Angaben zum Fahrer
 confirmation: Bestätigung
 
 # fields
@@ -27,6 +30,9 @@ country: Land
 region: Region
 numberOfWheels: Anzahl der Räder
 engine: Motor
+addDriver: Fahrer hinzufügen
+firstname: Vorname
+lastname: Nachname
 
 # explanations
 bug_details_intro: Da dies ein Fehlerbericht wird, sollten Sie den Fehler möglichst detailliert beschreiben.
