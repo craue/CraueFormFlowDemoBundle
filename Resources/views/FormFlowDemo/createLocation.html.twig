@@ -1,29 +1,10 @@
-{% extends 'CraueFormFlowDemoBundle::layout.html.twig' %}
+{% extends 'CraueFormFlowDemoBundle:FormFlowDemo:layout_flow.html.twig' %}
 
-{% block stylesheets %}
-	{{ parent() }}
-
-	{% stylesheets
-		'@CraueFormFlowBundle/Resources/assets/css/buttons.css'
-		'@CraueFormFlowDemoBundle/Resources/assets/css/form-flow.css'
-		filter='?yui_css'
-		output='css/form-flow.css'
-	%}
-		<link type="text/css" rel="stylesheet" href="{{ asset_url }}" />
-	{% endstylesheets %}
+{% block headline %}
+	<h1>{{ 'formFlow.demo' | trans }}: {{ 'formFlow.demo.locationFlow.title' | trans }}</h1>
 {% endblock %}
 
-{% block content %}
-	<div class="back-link">
-		<a href="{{ path('_FormFlow_start') }}">{{ 'back' | trans }}</a>
-	</div>
-
-	<h1>{{ 'formFlow.demo' | trans }}: {{ 'formFlow.demo.locationFlow.title' | trans }}</h1>
-
-	<div class="flow-steps">
-		{{- 'steps' | trans }}: {% include 'CraueFormFlowBundle:FormFlow:stepList.html.twig' -%}
-	</div>
-
+{% block form %}
 	<form class="flow-form" method="post" action="{{ path(app.request.attributes.get('_route'),
 			app.request.attributes.get('_route_params')) }}" {{ form_enctype(form) }}>
 		<fieldset>
@@ -55,6 +36,4 @@
 
 		{% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
 	</form>
-
-	<div class="clear"></div>
 {% endblock %}

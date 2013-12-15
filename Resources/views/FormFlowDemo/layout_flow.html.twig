@@ -1,0 +1,32 @@
+{% extends 'CraueFormFlowDemoBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+
+	{% stylesheets
+		'@CraueFormFlowBundle/Resources/assets/css/buttons.css'
+		'@CraueFormFlowDemoBundle/Resources/assets/css/form-flow.css'
+		filter='?yui_css'
+		output='css/form-flow.css'
+	%}
+		<link type="text/css" rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+	<div class="back-link">
+		<a href="{{ path('_FormFlow_start') }}">{{ 'back' | trans }}</a>
+	</div>
+
+	{% block headline %}
+	{% endblock %}
+
+	<div class="flow-steps">
+		{{- 'steps' | trans }}: {% include 'CraueFormFlowBundle:FormFlow:stepList.html.twig' -%}
+	</div>
+
+	{% block form %}
+	{% endblock %}
+
+	<div class="clear"></div>
+{% endblock %}
