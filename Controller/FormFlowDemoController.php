@@ -48,17 +48,7 @@ class FormFlowDemoController extends Controller {
 	 * @Template
 	 */
 	public function createTopicAction() {
-		return $this->processFlow(new Topic(), $this->getCreateTopicFlow(false));
-	}
-
-	/**
-	 * @Route("/create-topic-dsn/start/", name="_FormFlow_createTopic_dynamicStepNavigation_start")
-	 */
-	public function createTopicWithDynamicStepNavigationStartAction() {
-		$flow = $this->getCreateTopicFlow(true);
-		$flow->reset();
-
-		return $this->redirect($this->generateUrl('_FormFlow_createTopic_dynamicStepNavigation'));
+		return $this->processFlow(new Topic(), $this->get('craueFormFlowDemoBundle.form.flow.createTopic'));
 	}
 
 	/**
@@ -66,19 +56,10 @@ class FormFlowDemoController extends Controller {
 	 * @Template
 	 */
 	public function createTopicWithDynamicStepNavigationAction() {
-		return $this->processFlow(new Topic(), $this->getCreateTopicFlow(true));
-	}
-
-	protected function getCreateTopicFlow($dynamicStepNavigationEnabled) {
 		$flow = $this->get('craueFormFlowDemoBundle.form.flow.createTopic');
-		$flow->setAllowDynamicStepNavigation($dynamicStepNavigationEnabled);
+		$flow->setAllowDynamicStepNavigation(true);
 
-		// separate data per mode
-		if ($dynamicStepNavigationEnabled) {
-			$flow->setStepDataKey($flow->getStepDataKey() . '_dsn');
-		}
-
-		return $flow;
+		return $this->processFlow(new Topic(), $flow);
 	}
 
 	protected function processFlow($formData, FormFlowInterface $flow) {
