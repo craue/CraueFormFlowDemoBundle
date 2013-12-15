@@ -3,6 +3,7 @@ form_field_required: Pflichtfeld
 step: Schritt
 steps: Schritte
 code_available_at: Der Quellcode dieser Demo steht unter %url% zur Verfügung.
+data_usage_notice: Die hier eingegebenen Daten sind nur temporär in der Session vorhanden. Sie werden weder in einer Datenbank gespeichert noch in irgend einer anderen Form genutzt.
 
 # headlines
 formFlow.demo: CraueFormFlowBundle-Demo

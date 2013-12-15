@@ -33,3 +33,10 @@
 	display: inline-block;
     width: 160px;
 }
+
+.data-usage-notice {
+	padding: 10px 20px;
+	background-color: #f4dbdc;
+	color: #836a6b;
+	display: inline-block;
+}
