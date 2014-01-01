@@ -2,32 +2,25 @@
 
 namespace Craue\FormFlowDemoBundle\Form\Type;
 
+use Craue\FormFlowDemoBundle\Entity\Vehicle;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2013-2014 Christian Raue
+ * @copyright 2011-2013 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class VehicleEngineType extends AbstractType {
-
-	/**
-	 * @var ChoiceListInterface
-	 */
-	protected $choiceList;
-
-	public function setChoiceList(ChoiceListInterface $choiceList) {
-		$this->choiceList = $choiceList;
-	}
+class VehicleWheelsType extends AbstractType {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+		$validValues = Vehicle::getValidWheels();
+
 		$resolver->setDefaults(array(
-			'choice_list' => $this->choiceList,
+			'choices' => array_combine($validValues, $validValues),
 			'empty_value' => '',
 		));
 	}
@@ -43,7 +36,7 @@ class VehicleEngineType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function getName() {
-		return 'form_type_vehicleEngine';
+		return 'form_type_vehicleWheels';
 	}
 
 }

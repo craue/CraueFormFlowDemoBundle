@@ -1,55 +1,59 @@
-{% extends 'CraueFormFlowDemoBundle::layout.html.twig' %}
+{% extends 'CraueFormFlowDemoBundle:FormFlowDemo:layout_flow.html.twig' %}
 
-{% block stylesheets %}
-	{{ parent() }}
-
-	{% stylesheets
-		'@CraueFormFlowBundle/Resources/assets/css/buttons.css'
-		'@CraueFormFlowDemoBundle/Resources/assets/css/form-flow.css'
-		filter='?yui_css'
-		output='css/form-flow.css'
-	%}
-		<link type="text/css" rel="stylesheet" href="{{ asset_url }}" />
-	{% endstylesheets %}
+{% block headline %}
+	<h1>{{ 'formFlow.demo' | trans }}: {{ 'formFlow.demo.vehicleFlow.title' | trans }}</h1>
 {% endblock %}
 
-{% block content %}
-	<div class="back-link">
-		<a href="{{ path('_FormFlow_start') }}">{{ 'back' | trans }}</a>
-	</div>
-
-	<h1>{{ 'formFlow.demo' | trans }}: {{ 'formFlow.demo.vehicleFlow.title' | trans }}</h1>
-
-	<div class="flow-steps">
-		{{- 'steps' | trans }}: {% include 'CraueFormFlowBundle:FormFlow:stepList.html.twig' -%}
-	</div>
-
+{% block form %}
 	<form class="flow-form" method="post" action="{{ path(app.request.attributes.get('_route'),
 			app.request.attributes.get('_route_params')) }}" {{ form_enctype(form) }}>
 		<fieldset>
 			<legend>{{ 'step' | trans }} {{ flow.getCurrentStepNumber() }}: {{ flow.getCurrentStepLabel() | trans }}</legend>
-			{% include 'CraueFormFlowBundle:FormFlow:stepField.html.twig' %}
-
 			{{ form_errors(form) }}
 
 			{% if flow.getCurrentStepNumber() == 1 %}
 				{{ 'wheels_intro' | trans }}
 				<br /><br />
-				{{ form_row(form.numberOfWheels) }}
+				{{ form_row(form.vehicle.numberOfWheels) }}
+			{% endif %}
+
+			{% if flow.getCurrentStepNumber() == 2 %}
+				{{ form_row(form.vehicle.engine) }}
 			{% endif %}
 
 			{% if flow.getCurrentStepNumber() == 3 %}
+				{{ form_row(form.addDriver) }}
+			{% endif %}
+
+			{% if flow.getCurrentStepNumber() == 4 %}
+				{{ form_row(form.driver.firstname) }}
+				{{ form_row(form.driver.lastname) }}
+			{% endif %}
+
+			{% if flow.getCurrentStepNumber() == 5 %}
 				{{ 'confirmation_intro' | trans }}
-				<br />
+				<br /><br />
+				<b>{{ 'vehicle' | trans }}</b>
 				<dl>
 					<dt>{{ 'wheels' | trans }}:</dt>
-					<dd>{{ formData.numberOfWheels }}</dd>
+					<dd>{{ formData.vehicle.numberOfWheels }}</dd>
 
-					{% if formData.engine is not empty %}
+					{% if formData.vehicle.engine is not empty %}
 						<dt>{{ 'engine' | trans }}:</dt>
-						<dd>{{ formData.engine | trans({}, 'vehicleEngines') }}</dd>
+						<dd>{{ formData.vehicle.engine | trans({}, 'vehicleEngines') }}</dd>
 					{% endif %}
 				</dl>
+
+				{% if formData.addDriver %}
+					<b>{{ 'driver' | trans }}</b>
+					<dl>
+						<dt>{{ 'firstname' | trans }}:</dt>
+						<dd>{{ formData.driver.firstname }}</dd>
+
+						<dt>{{ 'lastname' | trans }}:</dt>
+						<dd>{{ formData.driver.lastname }}</dd>
+					</dl>
+				{% endif %}
 			{% endif %}
 
 			{{ form_rest(form) }}
@@ -57,6 +61,4 @@
 
 		{% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
 	</form>
-
-	<div class="clear"></div>
 {% endblock %}

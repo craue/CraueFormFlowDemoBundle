@@ -2,24 +2,24 @@
 
 namespace Craue\FormFlowDemoBundle\Form\Type;
 
+use Craue\FormFlowDemoBundle\Entity\Driver;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2013-2014 Christian Raue
+ * @copyright 2011-2013 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class VehicleEngineType extends AbstractType {
+class DriverType extends AbstractType {
 
 	/**
-	 * @var ChoiceListInterface
+	 * {@inheritDoc}
 	 */
-	protected $choiceList;
-
-	public function setChoiceList(ChoiceListInterface $choiceList) {
-		$this->choiceList = $choiceList;
+	public function buildForm(FormBuilderInterface $builder, array $options) {
+		$builder->add('firstname');
+		$builder->add('lastname');
 	}
 
 	/**
@@ -27,23 +27,15 @@ class VehicleEngineType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
-			'choice_list' => $this->choiceList,
-			'empty_value' => '',
+			'data_class' => get_class(new Driver()),
 		));
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getParent() {
-		return 'choice';
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	public function getName() {
-		return 'form_type_vehicleEngine';
+		return 'form_type_driver';
 	}
 
 }

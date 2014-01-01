@@ -5,7 +5,7 @@ namespace Craue\FormFlowDemoBundle\Controller;
 use Craue\FormFlowBundle\Form\FormFlowInterface;
 use Craue\FormFlowDemoBundle\Entity\Location;
 use Craue\FormFlowDemoBundle\Entity\Topic;
-use Craue\FormFlowDemoBundle\Entity\Vehicle;
+use Craue\FormFlowDemoBundle\Form\CreateVehicle;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -40,7 +40,7 @@ class FormFlowDemoController extends Controller {
 	 * @Template
 	 */
 	public function createVehicleAction() {
-		return $this->processFlow(new Vehicle(), $this->get('craueFormFlowDemoBundle.form.flow.createVehicle'));
+		return $this->processFlow(new CreateVehicle(), $this->get('craueFormFlowDemoBundle.form.flow.createVehicle'));
 	}
 
 	/**

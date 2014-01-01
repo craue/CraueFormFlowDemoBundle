@@ -30,6 +30,12 @@ class Vehicle {
 	 */
 	public $engine;
 
+	/**
+	 * @var Driver
+	 * @ORM\ManyToOne(targetEntity="Driver", inversedBy="vehicles", cascade={"persist", "remove"})
+	 */
+	public $driver;
+
 	public function canHaveEngine() {
 		return $this->numberOfWheels === 4;
 	}
