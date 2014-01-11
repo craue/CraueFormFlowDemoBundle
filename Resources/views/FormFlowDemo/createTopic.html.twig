@@ -48,13 +48,13 @@
 					<dd>{{ formData.title }}</dd>
 
 					<dt>{{ 'description' | trans }}:</dt>
-					<dd>{{ formData.description | craue_default }}</dd>
+					<dd>{{ formData.description | default('—') }}</dd>
 
 					<dt>{{ 'category' | trans }}:</dt>
 					<dd>{{ formData.category | trans({}, 'topicCategories') }}</dd>
 
 					<dt>{{ 'comment' | trans }}:</dt>
-					<dd>{{ formData.comment | nl2br | craue_default }}</dd>
+					<dd>{{ formData.comment | nl2br | default('—') }}</dd>
 
 					{% if formData.isBugReport() %}
 						<dt>{{ 'details' | trans }}:</dt>
