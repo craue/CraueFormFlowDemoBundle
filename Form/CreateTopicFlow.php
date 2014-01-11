@@ -43,7 +43,6 @@ class CreateTopicFlow extends FormFlow {
 			),
 			array(
 				'label' => 'confirmation',
-				'type' => new CreateTopicForm(), // needed to avoid InvalidOptionsException regarding option 'flowStep'
 			),
 		);
 	}
@@ -55,7 +54,6 @@ class CreateTopicFlow extends FormFlow {
 		$options = parent::getFormOptions($step, $options);
 
 		$options['cascade_validation'] = true;
-		$options['flowStep'] = $step;
 
 		if ($step === 3) {
 			$options['isBugReport'] = $this->getFormData()->isBugReport();

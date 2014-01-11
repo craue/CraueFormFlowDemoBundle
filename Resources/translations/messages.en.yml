@@ -3,19 +3,23 @@ form_field_required: required field
 step: step
 steps: steps
 code_available_at: The source code of this demo is available at %url%.
+data_usage_notice: The data entered here is only stored in the session temporarily. It will neither be persisted to a database nor used in any other form.
 
 # headlines
 formFlow.demo: CraueFormFlowBundle demo
 formFlow.demo.locationFlow.title: create a location (three steps)
-formFlow.demo.vehicleFlow.title: create a vehicle (three steps)
+formFlow.demo.vehicleFlow.title: create a vehicle (five steps, two related entities)
 formFlow.demo.topicFlow.title: create a topic (four steps)
-formFlow.demo.topicFlowWithDsn.title: create a topic (four steps, with dynamic step navigation)
+formFlow.demo.topicFlowWithDsn.title: create a topic (four steps, dynamic step navigation)
 
 # steps
 basics: basics
 comment: comment
 bug_details: bug details
+vehicle: vehicle
 wheels: wheels
+driver: driver
+driverDetails: driver details
 confirmation: confirmation
 
 # fields
@@ -27,6 +31,9 @@ country: country
 region: region
 numberOfWheels: number of wheels
 engine: engine
+addDriver: add driver
+firstname: first name
+lastname: last name
 
 # explanations
 bug_details_intro: Please describe the bug in detail.

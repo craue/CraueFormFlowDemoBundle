@@ -18,10 +18,8 @@
 
 .flow-steps {
 	float: left;
-	padding: 20px;
-	padding-right: 50px;
-	padding-bottom: 400px;
-	background-color: #DBDCF4;
+	padding: 20px 50px 250px 20px;
+	background-color: #dbdcf4;
 }
 
 .flow-form {
@@ -29,4 +27,34 @@
 	width: 600px;
 	margin-top: 10px;
 	margin-left: 10px;
+}
+
+.flow-form label {
+	display: inline-block;
+    width: 160px;
+}
+
+.flow-form input[type="text"] {
+	width: 300px;
+}
+
+.flow-form textarea {
+	width: 550px;
+	height: 200px;
+}
+
+.flow-form dl dt {
+	float: left;
+	width: 100px;
+}
+
+.data-usage-notice {
+	padding: 10px 20px;
+	background-color: #f4dbdc;
+	color: #836a6b;
+	display: inline-block;
+}
+
+.clear {
+	clear: both;
 }
