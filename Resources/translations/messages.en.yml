@@ -29,7 +29,7 @@ numberOfWheels: number of wheels
 engine: engine
 
 # explanations
-bug_details_intro: Since this will be a bug report, you should describe the bug in detail.
+bug_details_intro: Please describe the bug in detail.
 country_intro: For the top countries you have to choose the region in the next step.
 wheels_intro: When selecting four wheels you have to choose the engine in the next step.
 confirmation_intro: Make sure that all information is correct. If not, go back to make changes.
