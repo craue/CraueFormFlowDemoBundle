@@ -45,20 +45,20 @@
 				<br />
 				<dl>
 					<dt>{{ 'title' | trans }}:</dt>
-					<dd>{{ formData.title | craue_default }}</dd>
+					<dd>{{ formData.title }}</dd>
 
 					<dt>{{ 'description' | trans }}:</dt>
 					<dd>{{ formData.description | craue_default }}</dd>
 
 					<dt>{{ 'category' | trans }}:</dt>
-					<dd>{{ formData.category | trans({}, 'topicCategories') | craue_default }}</dd>
+					<dd>{{ formData.category | trans({}, 'topicCategories') }}</dd>
 
 					<dt>{{ 'comment' | trans }}:</dt>
 					<dd>{{ formData.comment | nl2br | craue_default }}</dd>
 
 					{% if formData.isBugReport() %}
 						<dt>{{ 'details' | trans }}:</dt>
-						<dd>{{ formData.details | nl2br | craue_default }}</dd>
+						<dd>{{ formData.details | nl2br }}</dd>
 					{% endif %}
 				</dl>
 			{% endif %}
