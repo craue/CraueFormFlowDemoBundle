@@ -20,7 +20,7 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"Craue\\FormFlowDemoBundle": ""
+			"Craue\\FormFlowDemoBundle\\": ""
 		}
 	},
 	"target-dir": "Craue/FormFlowDemoBundle"
