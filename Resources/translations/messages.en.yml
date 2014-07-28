@@ -11,6 +11,7 @@ formFlow.demo.locationFlow.title: create a location (three steps)
 formFlow.demo.vehicleFlow.title: create a vehicle (five steps, two related entities)
 formFlow.demo.topicFlow.title: create a topic (four steps)
 formFlow.demo.topicFlowWithDsn.title: create a topic (four steps, dynamic step navigation)
+formFlow.demo.topicFlowWithRedirectAfterSubmit.title: create a topic (four steps, redirect after submit)
 formFlow.demo.photoUploadFlow.title: upload a photo (three steps)
 
 # steps

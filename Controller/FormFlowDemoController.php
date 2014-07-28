@@ -64,6 +64,17 @@ class FormFlowDemoController extends Controller {
 	}
 
 	/**
+	 * @Route("/create-topic-redirect-after-submit/", name="_FormFlow_createTopic_redirectAfterSubmit")
+	 * @Template
+	 */
+	public function createTopicWithRedirectAfterSubmitAction() {
+		$flow = $this->get('craueFormFlowDemoBundle.form.flow.createTopic');
+		$flow->setAllowRedirectAfterSubmit(true);
+
+		return $this->processFlow(new Topic(), $flow);
+	}
+
+	/**
 	 * @Route("/photo-upload/", name="_FormFlow_photoUpload")
 	 * @Template
 	 */
@@ -74,9 +85,9 @@ class FormFlowDemoController extends Controller {
 	protected function processFlow($formData, FormFlowInterface $flow) {
 		$flow->bind($formData);
 
-		$form = $flow->createForm();
-		if ($flow->isValid($form)) {
-			$flow->saveCurrentStepData($form);
+		$form = $submittedForm = $flow->createForm();
+		if ($flow->isValid($submittedForm)) {
+			$flow->saveCurrentStepData($submittedForm);
 
 			if ($flow->nextStep()) {
 				// create form for next step
@@ -89,6 +100,14 @@ class FormFlowDemoController extends Controller {
 
 				return $this->redirect($this->generateUrl('_FormFlow_start'));
 			}
+		}
+
+		if ($flow->redirectAfterSubmit($submittedForm)) {
+			$request = $this->getRequest();
+			$params = $this->get('craue_formflow_util')->addRouteParameters(array_merge($request->query->all(),
+					$request->attributes->get('_route_params')), $flow);
+
+			return $this->redirect($this->generateUrl($request->attributes->get('_route'), $params));
 		}
 
 		return array(

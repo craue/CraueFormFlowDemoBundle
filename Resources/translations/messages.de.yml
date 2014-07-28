@@ -11,6 +11,7 @@ formFlow.demo.locationFlow.title: Standort erstellen (drei Schritte)
 formFlow.demo.vehicleFlow.title: Fahrzeug erstellen (fünf Schritte, zwei verknüpfte Objekte)
 formFlow.demo.topicFlow.title: Beitrag erstellen (vier Schritte)
 formFlow.demo.topicFlowWithDsn.title: Beitrag erstellen (vier Schritte, dynamische Schrittnavigation)
+formFlow.demo.topicFlowWithRedirectAfterSubmit.title: Beitrag erstellen (vier Schritte, „redirect after submit“)
 formFlow.demo.photoUploadFlow.title: Foto hochladen (drei Schritte)
 
 # steps
