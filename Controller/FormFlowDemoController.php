@@ -4,6 +4,7 @@ namespace Craue\FormFlowDemoBundle\Controller;
 
 use Craue\FormFlowBundle\Form\FormFlowInterface;
 use Craue\FormFlowDemoBundle\Entity\Location;
+use Craue\FormFlowDemoBundle\Entity\PhotoUpload;
 use Craue\FormFlowDemoBundle\Entity\Topic;
 use Craue\FormFlowDemoBundle\Form\CreateVehicle;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -60,6 +61,14 @@ class FormFlowDemoController extends Controller {
 		$flow->setAllowDynamicStepNavigation(true);
 
 		return $this->processFlow(new Topic(), $flow);
+	}
+
+	/**
+	 * @Route("/photo-upload/", name="_FormFlow_photoUpload")
+	 * @Template
+	 */
+	public function photoUploadAction() {
+		return $this->processFlow(new PhotoUpload(), $this->get('craueFormFlowDemoBundle.form.flow.photoUpload'));
 	}
 
 	protected function processFlow($formData, FormFlowInterface $flow) {

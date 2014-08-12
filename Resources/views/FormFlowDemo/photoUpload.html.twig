@@ -1,0 +1,39 @@
+{% extends 'CraueFormFlowDemoBundle:FormFlowDemo:layout_flow.html.twig' %}
+
+{% block headline %}
+	<h1>{{ 'formFlow.demo' | trans }}: {{ 'formFlow.demo.photoUploadFlow.title' | trans }}</h1>
+{% endblock %}
+
+{% block form %}
+	<form class="flow-form" method="post" action="{{ path(app.request.attributes.get('_route'),
+			app.request.attributes.get('_route_params')) }}" {{ form_enctype(form) }}>
+		<fieldset>
+			<legend>{{ 'step' | trans }} {{ flow.getCurrentStepNumber() }}: {{ flow.getCurrentStepLabel() | trans }}</legend>
+			{{ form_errors(form) }}
+
+			{% if flow.getCurrentStepNumber() == 1 %}
+				{{ 'photo_upload_intro' | trans({'%size%': constant('\\Craue\\FormFlowDemoBundle\\Entity\\PhotoUpload::UPLOAD_MAX_FILESIZE')}) }}
+				<br /><br />
+				{{ form_row(form.photo) }}
+			{% endif %}
+
+			{% if flow.getCurrentStepNumber() == 2 %}
+				{{ form_row(form.comment) }}
+			{% endif %}
+
+			{% if flow.getCurrentStepNumber() == 3 %}
+				<dl>
+					<dt>{{ 'photo' | trans }}:</dt>
+					<dd><img src="data:{{ formData.getPhotoMimeType() }};base64,{{ formData.getPhotoDataBase64Encoded() }}" /></dd>
+
+					<dt>{{ 'comment' | trans }}:</dt>
+					<dd>{{ formData.comment | default('—') }}</dd>
+				</dl>
+			{% endif %}
+
+			{{ form_rest(form) }}
+		</fieldset>
+
+		{% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
+	</form>
+{% endblock %}

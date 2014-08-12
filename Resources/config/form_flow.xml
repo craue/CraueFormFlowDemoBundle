@@ -29,5 +29,11 @@
 				<argument type="service" id="craueFormFlowDemoBundle.form.createVehicle" />
 			</call>
 		</service>
+
+		<service id="craueFormFlowDemoBundle.form.flow.photoUpload"
+				class="Craue\FormFlowDemoBundle\Form\PhotoUploadFlow"
+				parent="craue.form.flow"
+				scope="request">
+		</service>
 	</services>
 </container>
