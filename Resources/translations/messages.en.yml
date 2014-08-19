@@ -11,6 +11,7 @@ formFlow.demo.locationFlow.title: create a location (three steps)
 formFlow.demo.vehicleFlow.title: create a vehicle (five steps, two related entities)
 formFlow.demo.topicFlow.title: create a topic (four steps)
 formFlow.demo.topicFlowWithDsn.title: create a topic (four steps, dynamic step navigation)
+formFlow.demo.photoUploadFlow.title: upload a photo (three steps)
 
 # steps
 basics: basics
@@ -20,6 +21,8 @@ vehicle: vehicle
 wheels: wheels
 driver: driver
 driverDetails: driver details
+photo_select: select a photo
+photo_comment: add a comment
 confirmation: confirmation
 
 # fields
@@ -34,9 +37,11 @@ engine: engine
 addDriver: add driver
 firstname: first name
 lastname: last name
+photo: photo
 
 # explanations
 bug_details_intro: Please describe the bug in detail.
 country_intro: For the top countries you have to choose the region in the next step.
 wheels_intro: When selecting four wheels you have to choose the engine in the next step.
 confirmation_intro: Make sure that all information is correct. If not, go back to make changes.
+photo_upload_intro: "The file must not exceed %size%B in size."
