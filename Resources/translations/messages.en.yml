@@ -12,7 +12,7 @@ formFlow.demo.vehicleFlow.title: create a vehicle (five steps, two related entit
 formFlow.demo.topicFlow.title: create a topic (four steps)
 formFlow.demo.topicFlowWithDsn.title: create a topic (four steps, dynamic step navigation)
 formFlow.demo.topicFlowWithRedirectAfterSubmit.title: create a topic (four steps, redirect after submit)
-formFlow.demo.photoUploadFlow.title: upload a photo (three steps)
+formFlow.demo.photoUploadFlow.title: upload a photo (three steps, handling of file uploads)
 
 # steps
 basics: basics

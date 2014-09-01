@@ -12,7 +12,7 @@ formFlow.demo.vehicleFlow.title: Fahrzeug erstellen (fünf Schritte, zwei verkn�
 formFlow.demo.topicFlow.title: Beitrag erstellen (vier Schritte)
 formFlow.demo.topicFlowWithDsn.title: Beitrag erstellen (vier Schritte, dynamische Schrittnavigation)
 formFlow.demo.topicFlowWithRedirectAfterSubmit.title: Beitrag erstellen (vier Schritte, „redirect after submit“)
-formFlow.demo.photoUploadFlow.title: Foto hochladen (drei Schritte)
+formFlow.demo.photoUploadFlow.title: Foto hochladen (drei Schritte, Umgang mit Datei-Uploads)
 
 # steps
 basics: Grundsätzliches
