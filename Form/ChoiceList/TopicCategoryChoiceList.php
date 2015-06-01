@@ -9,7 +9,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2013-2014 Christian Raue
+ * @copyright 2013-2015 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class TopicCategoryChoiceList extends LazyChoiceList {
