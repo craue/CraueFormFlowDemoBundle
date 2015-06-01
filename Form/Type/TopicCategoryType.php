@@ -2,10 +2,12 @@
 
 namespace Craue\FormFlowDemoBundle\Form\Type;
 
+use Craue\FormFlowDemoBundle\Entity\Topic;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
@@ -15,22 +17,38 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class TopicCategoryType extends AbstractType {
 
 	/**
-	 * @var ChoiceListInterface
+	 * @var TranslatorInterface
 	 */
-	protected $choiceList;
+	protected $translator;
 
-	public function setChoiceList(ChoiceListInterface $choiceList) {
-		$this->choiceList = $choiceList;
+	public function setTranslator(TranslatorInterface $translator) {
+		$this->translator = $translator;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		$resolver->setDefaults(array(
-			'choice_list' => $this->choiceList,
+		parent::configureOptions($resolver);
+
+		$defaultOptions = array(
 			'empty_value' => '',
-		));
+		);
+
+		$translator = $this->translator;
+		$defaultOptions['choices'] = function(Options $options) use ($translator) {
+			$choices = array();
+
+			foreach (Topic::getValidCategories() as $category) {
+				$choices[$category] = $translator->trans($category, array(), 'topicCategories');
+			}
+
+			asort($choices);
+
+			return $choices;
+		};
+
+		$resolver->setDefaults($defaultOptions);
 	}
 
 	/**

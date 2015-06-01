@@ -12,8 +12,8 @@
 		<service id="craueFormFlowDemoBundle.form.type.topicCategory"
 				class="Craue\FormFlowDemoBundle\Form\Type\TopicCategoryType">
 			<tag name="form.type" alias="form_type_topicCategory" />
-			<call method="setChoiceList">
-				<argument type="service" id="craueFormFlowDemoBundle.form.choicelist.topicCategory" />
+			<call method="setTranslator">
+				<argument type="service" id="translator" />
 			</call>
 		</service>
 
@@ -33,8 +33,8 @@
 		<service id="craueFormFlowDemoBundle.form.type.vehicleEngine"
 				class="Craue\FormFlowDemoBundle\Form\Type\VehicleEngineType">
 			<tag name="form.type" alias="form_type_vehicleEngine" />
-			<call method="setChoiceList">
-				<argument type="service" id="craueFormFlowDemoBundle.form.choicelist.vehicleEngine" />
+			<call method="setTranslator">
+				<argument type="service" id="translator" />
 			</call>
 		</service>
 
