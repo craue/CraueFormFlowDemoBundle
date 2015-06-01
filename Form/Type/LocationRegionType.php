@@ -5,12 +5,13 @@ namespace Craue\FormFlowDemoBundle\Form\Type;
 use Craue\FormFlowDemoBundle\Model\Regions;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2013-2014 Christian Raue
+ * @copyright 2013-2015 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class LocationRegionType extends AbstractType {
@@ -27,9 +28,7 @@ class LocationRegionType extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		parent::setDefaultOptions($resolver);
-
+	public function configureOptions(OptionsResolver $resolver) {
 		$defaultOptions = array(
 			'country' => null,
 			'empty_value' => '',
@@ -49,6 +48,14 @@ class LocationRegionType extends AbstractType {
 		};
 
 		$resolver->setDefaults($defaultOptions);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	// TODO remove as soon as Symfony >= 2.7 is required
+	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+		$this->configureOptions($resolver);
 	}
 
 	/**

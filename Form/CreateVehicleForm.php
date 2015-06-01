@@ -6,11 +6,12 @@ use Craue\FormFlowDemoBundle\Entity\Vehicle;
 use Craue\FormFlowDemoBundle\Form\CreateVehicle;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2013-2014 Christian Raue
+ * @copyright 2013-2015 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class CreateVehicleForm extends AbstractType {
@@ -48,10 +49,18 @@ class CreateVehicleForm extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+	public function configureOptions(OptionsResolver $resolver) {
 		$resolver->setDefaults(array(
 			'data_class' => get_class(new CreateVehicle()),
 		));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	// TODO remove as soon as Symfony >= 2.7 is required
+	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+		$this->configureOptions($resolver);
 	}
 
 	/**
