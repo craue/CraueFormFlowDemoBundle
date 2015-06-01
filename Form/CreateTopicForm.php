@@ -5,6 +5,7 @@ namespace Craue\FormFlowDemoBundle\Form;
 use Craue\FormFlowDemoBundle\Entity\Topic;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -44,11 +45,19 @@ class CreateTopicForm extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+	public function configureOptions(OptionsResolver $resolver) {
 		$resolver->setDefaults(array(
 			'data' => new Topic(),
 			'isBugReport' => false,
 		));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	// TODO remove as soon as Symfony >= 2.7 is required
+	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+		$this->configureOptions($resolver);
 	}
 
 	/**

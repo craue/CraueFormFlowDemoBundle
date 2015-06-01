@@ -4,6 +4,7 @@ namespace Craue\FormFlowDemoBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -25,11 +26,19 @@ class TopicCategoryType extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+	public function configureOptions(OptionsResolver $resolver) {
 		$resolver->setDefaults(array(
 			'choice_list' => $this->choiceList,
 			'empty_value' => '',
 		));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	// TODO remove as soon as Symfony >= 2.7 is required
+	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+		$this->configureOptions($resolver);
 	}
 
 	/**

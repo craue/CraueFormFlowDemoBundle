@@ -4,6 +4,7 @@ namespace Craue\FormFlowDemoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -27,10 +28,18 @@ class CreateLocationStep2Form extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+	public function configureOptions(OptionsResolver $resolver) {
 		$resolver->setDefaults(array(
 			'country' => null,
 		));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	// TODO remove as soon as Symfony >= 2.7 is required
+	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+		$this->configureOptions($resolver);
 	}
 
 	/**
