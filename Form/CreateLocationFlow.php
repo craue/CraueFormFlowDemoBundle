@@ -28,11 +28,11 @@ class CreateLocationFlow extends FormFlow {
 		return array(
 			array(
 				'label' => 'country',
-				'type' => new CreateLocationStep1Form(),
+				'form_type' => new CreateLocationStep1Form(),
 			),
 			array(
 				'label' => 'region',
-				'type' => new CreateLocationStep2Form(),
+				'form_type' => new CreateLocationStep2Form(),
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 1 && !$flow->getFormData()->canHaveRegion();
 				},

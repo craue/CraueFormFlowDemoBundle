@@ -28,15 +28,15 @@ class CreateTopicFlow extends FormFlow {
 		return array(
 			array(
 				'label' => 'basics',
-				'type' => new CreateTopicForm(),
+				'form_type' => new CreateTopicForm(),
 			),
 			array(
 				'label' => 'comment',
-				'type' => new CreateTopicForm(),
+				'form_type' => new CreateTopicForm(),
 			),
 			array(
 				'label' => 'bug_details',
-				'type' => new CreateTopicForm(),
+				'form_type' => new CreateTopicForm(),
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 1 && !$flow->getFormData()->isBugReport();
 				},

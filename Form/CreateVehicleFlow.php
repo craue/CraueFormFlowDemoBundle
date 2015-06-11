@@ -71,22 +71,22 @@ class CreateVehicleFlow extends FormFlow implements EventSubscriberInterface {
 		return array(
 			array(
 				'label' => 'wheels',
-				'type' => $this->formType,
+				'form_type' => $this->formType,
 			),
 			array(
 				'label' => 'engine',
-				'type' => $this->formType,
+				'form_type' => $this->formType,
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 1 && !$flow->getFormData()->vehicle->canHaveEngine();
 				},
 			),
 			array(
 				'label' => 'driver',
-				'type' => $this->formType,
+				'form_type' => $this->formType,
 			),
 			array(
 				'label' => 'driverDetails',
-				'type' => $this->formType,
+				'form_type' => $this->formType,
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 3 && !$flow->getFormData()->addDriver;
 				},
