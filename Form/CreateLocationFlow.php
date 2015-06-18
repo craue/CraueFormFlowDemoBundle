@@ -49,8 +49,6 @@ class CreateLocationFlow extends FormFlow {
 	public function getFormOptions($step, array $options = array()) {
 		$options = parent::getFormOptions($step, $options);
 
-		$options['cascade_validation'] = true;
-
 		if ($step === 2) {
 			$options['country'] = $this->getFormData()->country;
 		}
