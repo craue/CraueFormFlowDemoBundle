@@ -33,6 +33,7 @@ class Vehicle {
 	/**
 	 * @var Driver
 	 * @ORM\ManyToOne(targetEntity="Driver", inversedBy="vehicles", cascade={"persist", "remove"})
+	 * @Assert\Valid
 	 */
 	public $driver;
 
