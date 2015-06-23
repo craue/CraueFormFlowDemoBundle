@@ -19,9 +19,8 @@
 		"symfony/symfony": "~2.1"
 	},
 	"autoload": {
-		"psr-0": {
+		"psr-4": {
 			"Craue\\FormFlowDemoBundle\\": ""
 		}
-	},
-	"target-dir": "Craue/FormFlowDemoBundle"
+	}
 }
