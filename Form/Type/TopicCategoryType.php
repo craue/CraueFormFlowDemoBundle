@@ -29,21 +29,31 @@ class TopicCategoryType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		parent::configureOptions($resolver);
+		$useChoicesAsValues = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
+		$usePlaceholder = method_exists('Symfony\Component\Form\AbstractType', 'configureOptions'); // Symfony's Form component 2.6 deprecated the "empty_value" option, but there seems to be no way to detect that version, so stick to this >=2.7 check.
 
 		$defaultOptions = array(
-			'empty_value' => '',
+			$usePlaceholder ? 'placeholder' : 'empty_value' => '',
 		);
 
+		if ($useChoicesAsValues) {
+			$defaultOptions['choices_as_values'] = true;
+		}
+
 		$translator = $this->translator;
-		$defaultOptions['choices'] = function(Options $options) use ($translator) {
+		$defaultOptions['choices'] = function(Options $options) use ($translator, $useChoicesAsValues) {
 			$choices = array();
 
-			foreach (Topic::getValidCategories() as $category) {
-				$choices[$category] = $translator->trans($category, array(), 'topicCategories');
+			foreach (Topic::getValidCategories() as $value) {
+				$label = $translator->trans($value, array(), 'topicCategories');
+				$choices[$useChoicesAsValues ? $label : $value] = $useChoicesAsValues ? $value : $label;
 			}
 
-			asort($choices);
+			if ($useChoicesAsValues) {
+				ksort($choices);
+			} else {
+				asort($choices);
+			}
 
 			return $choices;
 		};
@@ -63,13 +73,22 @@ class TopicCategoryType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function getParent() {
-		return 'choice';
+		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
+
+		return $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\ChoiceType' : 'choice';
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getName() {
+		return $this->getBlockPrefix();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getBlockPrefix() {
 		return 'form_type_topicCategory';
 	}
 

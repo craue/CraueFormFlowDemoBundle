@@ -17,8 +17,14 @@ class CountryExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFunctions() {
+		if (version_compare(\Twig_Environment::VERSION, '1.12', '<')) {
+			return array(
+				'country' => new \Twig_Function_Method($this, 'getCountry'),
+			);
+		}
+
 		return array(
-			'country' => new \Twig_Function_Method($this, 'getCountry'),
+			new \Twig_SimpleFunction('country', array($this, 'getCountry')),
 		);
 	}
 

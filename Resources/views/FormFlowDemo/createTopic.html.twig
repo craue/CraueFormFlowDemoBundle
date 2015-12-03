@@ -6,7 +6,7 @@
 
 {% block form %}
 	<form class="flow-form" method="post" action="{{ path(app.request.attributes.get('_route'),
-			app.request.attributes.get('_route_params') | craue_removeDynamicStepNavigationParameter(flow)) }}" {{ form_enctype(form) }}>
+			app.request.attributes.get('_route_params') | craue_removeDynamicStepNavigationParameter(flow)) }}">
 		<fieldset>
 			<legend>{{ 'step' | trans }} {{ flow.getCurrentStepNumber() }}: {{ flow.getCurrentStepLabel() | trans }}</legend>
 			{{ form_errors(form) }}

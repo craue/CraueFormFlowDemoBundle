@@ -44,6 +44,13 @@ class DriverType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function getName() {
+		return $this->getBlockPrefix();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getBlockPrefix() {
 		return 'form_type_driver';
 	}
 

@@ -25,18 +25,20 @@ class CreateTopicFlow extends FormFlow {
 	 * {@inheritDoc}
 	 */
 	protected function loadStepsConfig() {
+		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
+
 		return array(
 			array(
 				'label' => 'basics',
-				'type' => new CreateTopicForm(),
+				'type' => $useFqcn ? 'Craue\FormFlowDemoBundle\Form\CreateTopicForm' : new CreateTopicForm(),
 			),
 			array(
 				'label' => 'comment',
-				'type' => new CreateTopicForm(),
+				'type' => $useFqcn ? 'Craue\FormFlowDemoBundle\Form\CreateTopicForm' : new CreateTopicForm(),
 			),
 			array(
 				'label' => 'bug_details',
-				'type' => new CreateTopicForm(),
+				'type' => $useFqcn ? 'Craue\FormFlowDemoBundle\Form\CreateTopicForm' : new CreateTopicForm(),
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 1 && !$flow->getFormData()->isBugReport();
 				},
