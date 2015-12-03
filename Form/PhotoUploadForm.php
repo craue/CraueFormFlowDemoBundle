@@ -18,7 +18,8 @@ class PhotoUploadForm extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		switch ($options['flow_step']) {
 			case 1:
-				$builder->add('photo', 'file');
+				$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
+				$builder->add('photo', $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\FileType' : 'file');
 				break;
 			case 2:
 				$builder->add('comment', null, array(
@@ -32,6 +33,13 @@ class PhotoUploadForm extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function getName() {
+		return $this->getBlockPrefix();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getBlockPrefix() {
 		return 'photoUpload';
 	}
 

@@ -10,7 +10,7 @@
 		{% set routeParams = routeParams | craue_removeDynamicStepNavigationParameters(flow) %}
 	{% endif %}
 
-	<form class="flow-form" method="post" action="{{ path(app.request.attributes.get('_route'), routeParams) }}">
+	{{ form_start(form, {'action': path(app.request.attributes.get('_route'), routeParams), 'attr': {'class': 'flow-form'}}) }}
 		<fieldset>
 			<legend>{{ 'step' | trans }} {{ flow.getCurrentStepNumber() }}: {{ flow.getCurrentStepLabel() | trans }}</legend>
 			{{ form_errors(form) }}
@@ -48,5 +48,5 @@
 		</fieldset>
 
 		{% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
-	</form>
+	{{ form_end(form) }}
 {% endblock %}

@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block form %}
-	<form class="flow-form" method="post" action="{{ path(app.request.attributes.get('_route'),
-			app.request.attributes.get('_route_params')) }}" {{ form_enctype(form) }}>
+	{{ form_start(form, {'action': path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')), 'attr': {'class': 'flow-form'}}) }}
 		<fieldset>
 			<legend>{{ 'step' | trans }} {{ flow.getCurrentStepNumber() }}: {{ flow.getCurrentStepLabel() | trans }}</legend>
 			{{ form_errors(form) }}
@@ -35,5 +34,5 @@
 		</fieldset>
 
 		{% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
-	</form>
+	{{ form_end(form) }}
 {% endblock %}
