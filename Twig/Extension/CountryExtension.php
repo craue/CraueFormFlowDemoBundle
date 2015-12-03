@@ -2,9 +2,7 @@
 
 namespace Craue\FormFlowDemoBundle\Twig\Extension;
 
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\Locale\Locale;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
@@ -17,12 +15,6 @@ class CountryExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFunctions() {
-		if (version_compare(\Twig_Environment::VERSION, '1.12', '<')) {
-			return array(
-				'country' => new \Twig_Function_Method($this, 'getCountry'),
-			);
-		}
-
 		return array(
 			new \Twig_SimpleFunction('country', array($this, 'getCountry')),
 		);
@@ -41,13 +33,7 @@ class CountryExtension extends \Twig_Extension {
 	 */
 	public function getCountry($key) {
 		if (!empty($key)) {
-			$locale = \Locale::getDefault();
-
-			if (Kernel::VERSION_ID < 20300) {
-				$choices = Locale::getDisplayCountries($locale);
-			} else {
-				$choices = Intl::getRegionBundle()->getCountryNames($locale);
-			}
+			$choices = Intl::getRegionBundle()->getCountryNames(\Locale::getDefault());
 
 			if (array_key_exists($key, $choices)) {
 				return $choices[$key];
