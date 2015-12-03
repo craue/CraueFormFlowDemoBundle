@@ -59,26 +59,27 @@ class CreateVehicleFlow extends FormFlow implements EventSubscriberInterface {
 	 */
 	protected function loadStepsConfig() {
 		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
+		$formType = $useFqcn ? 'Craue\FormFlowDemoBundle\Form\CreateVehicleForm' : 'createVehicle';
 
 		return array(
 			array(
 				'label' => 'wheels',
-				'type' => $useFqcn ? 'Craue\FormFlowDemoBundle\Form\CreateVehicleForm' : 'createVehicle',
+				'type' => $formType,
 			),
 			array(
 				'label' => 'engine',
-				'type' => $useFqcn ? 'Craue\FormFlowDemoBundle\Form\CreateVehicleForm' : 'createVehicle',
+				'type' => $formType,
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 1 && !$flow->getFormData()->vehicle->canHaveEngine();
 				},
 			),
 			array(
 				'label' => 'driver',
-				'type' => $useFqcn ? 'Craue\FormFlowDemoBundle\Form\CreateVehicleForm' : 'createVehicle',
+				'type' => $formType,
 			),
 			array(
 				'label' => 'driverDetails',
-				'type' => $useFqcn ? 'Craue\FormFlowDemoBundle\Form\CreateVehicleForm' : 'createVehicle',
+				'type' => $formType,
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 3 && !$flow->getFormData()->addDriver;
 				},
