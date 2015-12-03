@@ -9,7 +9,6 @@ use Craue\FormFlowBundle\Form\FormFlowInterface;
 use Craue\FormFlowDemoBundle\Entity\Driver;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * This flow uses one form type for the entire flow.
@@ -19,15 +18,6 @@ use Symfony\Component\Form\FormTypeInterface;
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class CreateVehicleFlow extends FormFlow implements EventSubscriberInterface {
-
-	/**
-	 * @var FormTypeInterface
-	 */
-	protected $formType;
-
-	public function setFormType(FormTypeInterface $formType) {
-		$this->formType = $formType;
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -68,25 +58,28 @@ class CreateVehicleFlow extends FormFlow implements EventSubscriberInterface {
 	 * {@inheritDoc}
 	 */
 	protected function loadStepsConfig() {
+		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
+		$formType = $useFqcn ? 'Craue\FormFlowDemoBundle\Form\CreateVehicleForm' : 'createVehicle';
+
 		return array(
 			array(
 				'label' => 'wheels',
-				'form_type' => $this->formType,
+				'form_type' => $formType,
 			),
 			array(
 				'label' => 'engine',
-				'form_type' => $this->formType,
+				'form_type' => $formType,
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 1 && !$flow->getFormData()->vehicle->canHaveEngine();
 				},
 			),
 			array(
 				'label' => 'driver',
-				'form_type' => $this->formType,
+				'form_type' => $formType,
 			),
 			array(
 				'label' => 'driverDetails',
-				'form_type' => $this->formType,
+				'form_type' => $formType,
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 3 && !$flow->getFormData()->addDriver;
 				},

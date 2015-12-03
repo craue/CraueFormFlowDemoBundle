@@ -25,9 +25,6 @@
 				class="Craue\FormFlowDemoBundle\Form\CreateVehicleFlow"
 				parent="craue.form.flow"
 				scope="request">
-			<call method="setFormType">
-				<argument type="service" id="craueFormFlowDemoBundle.form.createVehicle" />
-			</call>
 		</service>
 
 		<service id="craueFormFlowDemoBundle.form.flow.photoUpload"

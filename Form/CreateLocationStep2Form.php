@@ -18,9 +18,12 @@ class CreateLocationStep2Form extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder->add('region', 'form_type_locationRegion', array(
+		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
+		$usePlaceholder = method_exists('Symfony\Component\Form\AbstractType', 'configureOptions'); // Symfony's Form component 2.6 deprecated the "empty_value" option, but there seems to be no way to detect that version, so stick to this >=2.7 check.
+
+		$builder->add('region', $useFqcn ? 'Craue\FormFlowDemoBundle\Form\Type\LocationRegionType' : 'form_type_locationRegion', array(
 			'country' => $options['country'],
-			'empty_value' => '',
+			$usePlaceholder ? 'placeholder' : 'empty_value' => '',
 			'required' => true,
 		));
 	}
@@ -46,6 +49,13 @@ class CreateLocationStep2Form extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function getName() {
+		return $this->getBlockPrefix();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getBlockPrefix() {
 		return 'createLocationStep2';
 	}
 

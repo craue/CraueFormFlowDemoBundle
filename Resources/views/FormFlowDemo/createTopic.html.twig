@@ -10,7 +10,7 @@
 		{% set routeParams = routeParams | craue_removeDynamicStepNavigationParameters(flow) %}
 	{% endif %}
 
-	<form class="flow-form" method="post" action="{{ path(app.request.attributes.get('_route'), routeParams) }}" {{ form_enctype(form) }}>
+	<form class="flow-form" method="post" action="{{ path(app.request.attributes.get('_route'), routeParams) }}">
 		<fieldset>
 			<legend>{{ 'step' | trans }} {{ flow.getCurrentStepNumber() }}: {{ flow.getCurrentStepLabel() | trans }}</legend>
 			{{ form_errors(form) }}

@@ -29,20 +29,32 @@ class LocationRegionType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
+		$useChoicesAsValues = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
+		$usePlaceholder = method_exists('Symfony\Component\Form\AbstractType', 'configureOptions'); // Symfony's Form component 2.6 deprecated the "empty_value" option, but there seems to be no way to detect that version, so stick to this >=2.7 check.
+
 		$defaultOptions = array(
 			'country' => null,
-			'empty_value' => '',
+			$usePlaceholder ? 'placeholder' : 'empty_value' => '',
 		);
 
+		if ($useChoicesAsValues) {
+			$defaultOptions['choices_as_values'] = true;
+		}
+
 		$translator = $this->translator;
-		$defaultOptions['choices'] = function(Options $options) use ($translator) {
+		$defaultOptions['choices'] = function(Options $options) use ($translator, $useChoicesAsValues) {
 			$choices = array();
 
 			foreach (Regions::getRegionsForCountry($options['country']) as $value) {
-				$choices[$value] = $translator->trans($value, array(), 'locationRegions');
+				$label = $translator->trans($value, array(), 'locationRegions');
+				$choices[$useChoicesAsValues ? $label : $value] = $useChoicesAsValues ? $value : $label;
 			}
 
-			asort($choices);
+			if ($useChoicesAsValues) {
+				ksort($choices);
+			} else {
+				asort($choices);
+			}
 
 			return $choices;
 		};
@@ -62,13 +74,22 @@ class LocationRegionType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function getParent() {
-		return 'choice';
+		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
+
+		return $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\ChoiceType' : 'choice';
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getName() {
+		return $this->getBlockPrefix();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getBlockPrefix() {
 		return 'form_type_locationRegion';
 	}
 

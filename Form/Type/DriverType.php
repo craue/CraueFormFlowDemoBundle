@@ -2,7 +2,6 @@
 
 namespace Craue\FormFlowDemoBundle\Form\Type;
 
-use Craue\FormFlowDemoBundle\Entity\Driver;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +27,7 @@ class DriverType extends AbstractType {
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
 		$resolver->setDefaults(array(
-			'data_class' => get_class(new Driver()),
+			'data_class' => 'Craue\FormFlowDemoBundle\Entity\Driver',
 		));
 	}
 
@@ -44,6 +43,13 @@ class DriverType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function getName() {
+		return $this->getBlockPrefix();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getBlockPrefix() {
 		return 'form_type_driver';
 	}
 
