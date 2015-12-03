@@ -2,8 +2,6 @@
 
 namespace Craue\FormFlowDemoBundle\Form;
 
-use Craue\FormFlowDemoBundle\Entity\Vehicle;
-use Craue\FormFlowDemoBundle\Form\CreateVehicle;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,14 +23,14 @@ class CreateVehicleForm extends AbstractType {
 		switch ($options['flow_step']) {
 			case 1:
 				$vehicleForm = $builder->create('vehicle', $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\FormType' : 'form', array(
-					'data_class' => get_class(new Vehicle()),
+					'data_class' => 'Craue\FormFlowDemoBundle\Entity\Vehicle',
 				));
 				$vehicleForm->add('numberOfWheels', $useFqcn ? 'Craue\FormFlowDemoBundle\Form\Type\VehicleWheelsType' : 'form_type_vehicleWheels');
 				$builder->add($vehicleForm);
 				break;
 			case 2:
 				$vehicleForm = $builder->create('vehicle', $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\FormType' : 'form', array(
-					'data_class' => get_class(new Vehicle()),
+					'data_class' => 'Craue\FormFlowDemoBundle\Entity\Vehicle',
 				));
 				$vehicleForm->add('engine', $useFqcn ? 'Craue\FormFlowDemoBundle\Form\Type\VehicleEngineType' : 'form_type_vehicleEngine');
 				$builder->add($vehicleForm);
@@ -53,7 +51,7 @@ class CreateVehicleForm extends AbstractType {
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
 		$resolver->setDefaults(array(
-			'data_class' => get_class(new CreateVehicle()),
+			'data_class' => 'Craue\FormFlowDemoBundle\Form\CreateVehicle',
 		));
 	}
 
