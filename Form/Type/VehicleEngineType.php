@@ -29,14 +29,15 @@ class VehicleEngineType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		$useChoicesAsValues = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
 		$usePlaceholder = method_exists('Symfony\Component\Form\AbstractType', 'configureOptions'); // Symfony's Form component 2.6 deprecated the "empty_value" option, but there seems to be no way to detect that version, so stick to this >=2.7 check.
+		$useChoicesAsValues = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
+		$setChoicesAsValuesOption = $useChoicesAsValues && method_exists('Symfony\Component\Form\AbstractType', 'getName'); // Symfony's Form component >=2.8 && <3.0
 
 		$defaultOptions = array(
 			$usePlaceholder ? 'placeholder' : 'empty_value' => '',
 		);
 
-		if ($useChoicesAsValues) {
+		if ($setChoicesAsValuesOption) {
 			$defaultOptions['choices_as_values'] = true;
 		}
 

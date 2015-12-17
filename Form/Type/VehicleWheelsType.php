@@ -18,8 +18,8 @@ class VehicleWheelsType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
 		$usePlaceholder = method_exists('Symfony\Component\Form\AbstractType', 'configureOptions'); // Symfony's Form component 2.6 deprecated the "empty_value" option, but there seems to be no way to detect that version, so stick to this >=2.7 check.
+		$setChoicesAsValuesOption = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix') && method_exists('Symfony\Component\Form\AbstractType', 'getName'); // Symfony's Form component >=2.8 && <3.0
 		$validValues = Vehicle::getValidWheels();
 
 		$defaultOptions = array(
@@ -27,7 +27,7 @@ class VehicleWheelsType extends AbstractType {
 			$usePlaceholder ? 'placeholder' : 'empty_value' => '',
 		);
 
-		if ($useFqcn) {
+		if ($setChoicesAsValuesOption) {
 			$defaultOptions['choices_as_values'] = true;
 		}
 
