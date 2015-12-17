@@ -2,7 +2,7 @@
 	"name": "craue/formflow-demo-bundle",
 	"type": "symfony-bundle",
 	"description": "Example code showcasing the features of CraueFormFlowBundle.",
-	"keywords": ["symfony2", "form", "wizard", "step", "demo"],
+	"keywords": ["form", "wizard", "step", "demo", "symfony2", "symfony3"],
 	"homepage": "https://github.com/craue/CraueFormFlowDemoBundle",
 	"license": "MIT",
 	"authors": [
