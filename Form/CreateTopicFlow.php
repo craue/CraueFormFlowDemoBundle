@@ -17,13 +17,6 @@ class CreateTopicFlow extends FormFlow {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getName() {
-		return 'createTopic';
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	protected function loadStepsConfig() {
 		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
 		$formType = $useFqcn ? 'Craue\FormFlowDemoBundle\Form\CreateTopicForm' : new CreateTopicForm();

@@ -17,13 +17,6 @@ class CreateLocationFlow extends FormFlow {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getName() {
-		return 'createLocation';
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	protected function loadStepsConfig() {
 		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
 

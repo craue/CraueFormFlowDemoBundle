@@ -22,13 +22,6 @@ class CreateVehicleFlow extends FormFlow implements EventSubscriberInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getName() {
-		return 'createVehicle';
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	public function setEventDispatcher(EventDispatcherInterface $dispatcher) {
 		parent::setEventDispatcher($dispatcher);
 		$dispatcher->addSubscriber($this);
