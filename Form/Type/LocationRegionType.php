@@ -6,7 +6,6 @@ use Craue\FormFlowDemoBundle\Model\Regions;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -29,13 +28,12 @@ class LocationRegionType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		$usePlaceholder = method_exists('Symfony\Component\Form\AbstractType', 'configureOptions'); // Symfony's Form component 2.6 deprecated the "empty_value" option, but there seems to be no way to detect that version, so stick to this >=2.7 check.
 		$useChoicesAsValues = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
 		$setChoicesAsValuesOption = $useChoicesAsValues && method_exists('Symfony\Component\Form\AbstractType', 'getName'); // Symfony's Form component >=2.8 && <3.0
 
 		$defaultOptions = array(
 			'country' => null,
-			$usePlaceholder ? 'placeholder' : 'empty_value' => '',
+			'placeholder' => '',
 		);
 
 		if ($setChoicesAsValuesOption) {
@@ -61,14 +59,6 @@ class LocationRegionType extends AbstractType {
 		};
 
 		$resolver->setDefaults($defaultOptions);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	// TODO remove as soon as Symfony >= 2.7 is required
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$this->configureOptions($resolver);
 	}
 
 	/**

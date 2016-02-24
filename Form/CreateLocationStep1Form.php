@@ -16,7 +16,6 @@ class CreateLocationStep1Form extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$usePlaceholder = method_exists('Symfony\Component\Form\AbstractType', 'configureOptions'); // Symfony's Form component 2.6 deprecated the "empty_value" option, but there seems to be no way to detect that version, so stick to this >=2.7 check.
 		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
 		$setChoicesAsValuesOption = $useFqcn && method_exists('Symfony\Component\Form\AbstractType', 'getName'); // Symfony's Form component >=2.8 && <3.0
 
@@ -26,7 +25,7 @@ class CreateLocationStep1Form extends AbstractType {
 		}
 
 		$builder->add('country', $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\CountryType' : 'country', array_merge($defaultChoiceOptions, array(
-			$usePlaceholder ? 'placeholder' : 'empty_value' => '',
+			'placeholder' => '',
 			'preferred_choices' => array(
 				'AT', 'CH', 'DE', 'US',
 			),

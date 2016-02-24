@@ -5,7 +5,6 @@ namespace Craue\FormFlowDemoBundle\Form\Type;
 use Craue\FormFlowDemoBundle\Entity\Vehicle;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
@@ -18,13 +17,12 @@ class VehicleWheelsType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		$usePlaceholder = method_exists('Symfony\Component\Form\AbstractType', 'configureOptions'); // Symfony's Form component 2.6 deprecated the "empty_value" option, but there seems to be no way to detect that version, so stick to this >=2.7 check.
 		$setChoicesAsValuesOption = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix') && method_exists('Symfony\Component\Form\AbstractType', 'getName'); // Symfony's Form component >=2.8 && <3.0
 		$validValues = Vehicle::getValidWheels();
 
 		$defaultOptions = array(
 			'choices' => array_combine($validValues, $validValues),
-			$usePlaceholder ? 'placeholder' : 'empty_value' => '',
+			'placeholder' => '',
 		);
 
 		if ($setChoicesAsValuesOption) {
@@ -32,14 +30,6 @@ class VehicleWheelsType extends AbstractType {
 		}
 
 		$resolver->setDefaults($defaultOptions);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	// TODO remove as soon as Symfony >= 2.7 is required
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$this->configureOptions($resolver);
 	}
 
 	/**

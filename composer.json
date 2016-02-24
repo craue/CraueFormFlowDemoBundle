@@ -16,7 +16,7 @@
 		"doctrine/orm": "~2.3",
 		"sensio/framework-extra-bundle": "~3.0",
 		"symfony/assetic-bundle": "^2.7.1",
-		"symfony/symfony": "^2.6.4|~3.0"
+		"symfony/symfony": "~2.7|~3.0"
 	},
 	"autoload": {
 		"psr-4": {
