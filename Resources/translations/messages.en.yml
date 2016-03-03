@@ -45,4 +45,4 @@ bug_details_intro: Please describe the bug in detail.
 country_intro: For the top countries you have to choose the region in the next step.
 wheels_intro: When selecting four wheels you have to choose the engine in the next step.
 confirmation_intro: Make sure that all information is correct. If not, go back to make changes.
-photo_upload_intro: "The file must not exceed %size%B in size."
+photo_upload_intro: The file must not exceed %size%B in size.

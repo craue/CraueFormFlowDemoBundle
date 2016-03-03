@@ -45,4 +45,4 @@ bug_details_intro: Bitte beschreiben Sie den Fehler möglichst detailliert.
 country_intro: Für die oberen Länder muss im nächsten Schritt noch die Region gewählt werden.
 wheels_intro: Im Fall von vier Rädern muss im nächsten Schritt noch der Motor gewählt werden.
 confirmation_intro: Prüfen Sie genau, ob alle Angaben korrekt sind. Falls nicht, gehen Sie zurück, um Änderungen vorzunehmen.
-photo_upload_intro: "Die Datei darf max. %size%B groß sein."
+photo_upload_intro: Die Datei darf max. %size%B groß sein.
