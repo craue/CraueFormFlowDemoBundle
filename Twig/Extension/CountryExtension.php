@@ -40,18 +40,20 @@ class CountryExtension extends \Twig_Extension {
 	 * @return string|null
 	 */
 	public function getCountry($key) {
-		if (!empty($key)) {
-			$locale = \Locale::getDefault();
+		if (empty($key)) {
+			return null;
+		}
 
-			if (Kernel::VERSION_ID < 20300) {
-				$choices = Locale::getDisplayCountries($locale);
-			} else {
-				$choices = Intl::getRegionBundle()->getCountryNames($locale);
-			}
+		$locale = \Locale::getDefault();
 
-			if (array_key_exists($key, $choices)) {
-				return $choices[$key];
-			}
+		if (Kernel::VERSION_ID < 20300) {
+			$choices = Locale::getDisplayCountries($locale);
+		} else {
+			$choices = Intl::getRegionBundle()->getCountryNames($locale);
+		}
+
+		if (array_key_exists($key, $choices)) {
+			return $choices[$key];
 		}
 	}
 
