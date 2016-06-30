@@ -32,12 +32,14 @@ class CountryExtension extends \Twig_Extension {
 	 * @return string|null
 	 */
 	public function getCountry($key) {
-		if (!empty($key)) {
-			$choices = Intl::getRegionBundle()->getCountryNames(\Locale::getDefault());
+		if (empty($key)) {
+			return null;
+		}
 
-			if (array_key_exists($key, $choices)) {
-				return $choices[$key];
-			}
+		$choices = Intl::getRegionBundle()->getCountryNames(\Locale::getDefault());
+
+		if (array_key_exists($key, $choices)) {
+			return $choices[$key];
 		}
 	}
 
