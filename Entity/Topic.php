@@ -30,7 +30,7 @@ class Topic {
 	/**
 	 * @var string
 	 * @ORM\Column(name="category", type="string", nullable=false)
-	 * @Assert\Choice(callback="getValidCategories", groups={"flow_createTopic_step1"})
+	 * @Assert\Choice(callback="getValidCategories", groups={"flow_createTopic_step1"}, strict=true)
 	 * @Assert\NotBlank(groups={"flow_createTopic_step1"})
 	 */
 	public $category;
