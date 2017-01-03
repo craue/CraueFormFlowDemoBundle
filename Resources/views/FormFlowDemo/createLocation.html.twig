@@ -1,4 +1,4 @@
-{% extends 'CraueFormFlowDemoBundle:FormFlowDemo:layout_flow.html.twig' %}
+{% extends '@CraueFormFlowDemo/FormFlowDemo/layout_flow.html.twig' %}
 
 {% block headline %}
 	<h1>{{ 'formFlow.demo' | trans }}: {{ 'formFlow.demo.locationFlow.title' | trans }}</h1>
@@ -33,6 +33,6 @@
 			{{ form_rest(form) }}
 		</fieldset>
 
-		{% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
+		{% include '@CraueFormFlow/FormFlow/buttons.html.twig' %}
 	{{ form_end(form) }}
 {% endblock %}

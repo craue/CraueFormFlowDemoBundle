@@ -1,4 +1,4 @@
-{% extends 'CraueFormFlowDemoBundle::layout.html.twig' %}
+{% extends '@CraueFormFlowDemo/layout.html.twig' %}
 
 {% block stylesheets %}
 	{{ parent() }}
@@ -22,7 +22,7 @@
 	{% endblock %}
 
 	<div class="flow-steps">
-		{{- 'steps' | trans }}: {% include 'CraueFormFlowBundle:FormFlow:stepList.html.twig' -%}
+		{{- 'steps' | trans }}: {% include '@CraueFormFlow/FormFlow/stepList.html.twig' -%}
 	</div>
 
 	{% block form %}
