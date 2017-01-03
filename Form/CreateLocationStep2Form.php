@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2013-2016 Christian Raue
+ * @copyright 2013-2017 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class CreateLocationStep2Form extends AbstractType {
