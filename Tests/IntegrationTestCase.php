@@ -86,15 +86,24 @@ abstract class IntegrationTestCase extends WebTestCase {
 	}
 
 	/**
+	 * @param string $imageSelector
+	 * @param string $expectedSrcAttr
+	 * @param Crawler $crawler
+	 */
+	protected function assertImageSrc($imageSelector, $expectedSrcAttr, Crawler $crawler) {
+		$this->assertEquals($expectedSrcAttr, $this->getNodeAttribute($imageSelector, 'src', $crawler));
+	}
+
+	/**
 	 * @param string $fieldSelector
 	 * @param Crawler $crawler
 	 * @return array
 	 */
 	protected function getOptionsOfSelectField($fieldSelector, Crawler $crawler) {
-		return $crawler->filter('select' . $fieldSelector . ' option')->each(function($node, $i) {
+		return $crawler->filter('select' . $fieldSelector . ' option')->each(function(Crawler $node, $i) {
 			return array(
-				'value' => $node instanceof \DOMElement ? $node->getAttribute('value') : $node->attr('value'),
-				'label' => $node instanceof \DOMElement ? $node->nodeValue : $node->text(),
+				'value' => $node->attr('value'),
+				'label' => $node->text(),
 			);
 		});
 	}
@@ -107,14 +116,28 @@ abstract class IntegrationTestCase extends WebTestCase {
 	protected function getListContent($listSelector, Crawler $crawler) {
 		$list = $crawler->filter('dl' . $listSelector);
 
-		$dtValues = $list->filter('dt')->each(function($node, $i) {
-			return rtrim($node instanceof \DOMElement ? $node->nodeValue : $node->text(), ':');
+		$dtValues = $list->filter('dt')->each(function(Crawler $node, $i) {
+			return rtrim($node->text(), ':');
 		});
-		$ddValues = $list->filter('dd')->each(function($node, $i) {
-			return $node instanceof \DOMElement ? $node->nodeValue : $node->text();
+		$ddValues = $list->filter('dd')->each(function(Crawler $node, $i) {
+			return $node->text();
 		});
 
 		return array_combine($dtValues, $ddValues);
+
+	}
+
+	/**
+	 * @param string $selector
+	 * @param string $attribute
+	 * @param Crawler $crawler
+	 */
+	private function getNodeAttribute($selector, $attribute, Crawler $crawler) {
+		try {
+			return $crawler->filter($selector)->attr($attribute);
+		} catch (\InvalidArgumentException $e) {
+			$this->fail(sprintf("No node found for selector '%s'. Content:\n%s", $selector, $this->client->getResponse()->getContent()));
+		}
 	}
 
 	/**

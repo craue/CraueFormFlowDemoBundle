@@ -2,12 +2,12 @@ language: php
 
 matrix:
   include:
-    - php: 5.3.3
-      env: DEPS='lowest'
+    - php: 5.3
+      env: DEPS='lowest' SYMFONY_DEPRECATIONS_HELPER='2'
     - php: 5.6
-      env: SYMFONY_VERSION='2.3.*' SYMFONY_DEPRECATIONS_HELPER='666'
+      env: SYMFONY_VERSION='2.7.*'
     - php: 7.0
-      env: DEPS='unmodified' SYMFONY_DEPRECATIONS_HELPER='666'
+      env: DEPS='unmodified'
     - php: hhvm
       env: SYMFONY_VERSION='2.7.*'
   fast_finish: true

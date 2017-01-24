@@ -103,7 +103,7 @@ class FormFlowDemoController extends Controller {
 		}
 
 		if ($flow->redirectAfterSubmit($submittedForm)) {
-			$request = $this->getRequest();
+			$request = $this->get('request_stack')->getCurrentRequest();
 			$params = $this->get('craue_formflow_util')->addRouteParameters(array_merge($request->query->all(),
 					$request->attributes->get('_route_params')), $flow);
 

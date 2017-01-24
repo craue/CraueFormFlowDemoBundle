@@ -3,6 +3,7 @@
 namespace Craue\FormFlowDemoBundle\Tests;
 
 use Craue\FormFlowDemoBundle\Model\Regions;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @group integration
@@ -34,23 +35,12 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 		$this->assertEquals($expectedOptionsCountryTopChoices, array_slice($this->getOptionsOfSelectField('#createLocationStep1_country', $crawler), 0, count($expectedOptionsCountryTopChoices), true));
 
 		// invalid country -> step 1 again
-		if (method_exists($form, 'disableValidation')) {
-			$form->disableValidation();
-			$crawler = $this->client->submit($form, array(
-				'createLocationStep1[country]' => 'INVALID',
-			));
-		} else {
-			// impossible to send invalid values with DomCrawler, see https://github.com/symfony/symfony/issues/7672
-			// TODO remove as soon as Symfony >= 2.4 is required
-			$crawler = $this->client->request($form->getMethod(), $form->getUri(), array(
-				'flow_createLocation_step' => 1,
-				'createLocationStep1' => array(
-					'country' => 'INVALID',
-				),
-			));
-		}
+		$form->disableValidation();
+		$crawler = $this->client->submit($form, array(
+			'createLocationStep1[country]' => 'INVALID',
+		));
 		$this->assertCurrentStepNumber(1, $crawler);
-		$this->assertFieldHasError('#createLocationStep1_country', 'This value is not valid.', $crawler);
+		$this->assertFieldHasError('#createLocationStep1_country', Kernel::VERSION_ID < 30200 ? 'This value is not valid.' : 'This value is not a valid country.', $crawler);
 
 		// country without region -> step 3
 		$form = $crawler->selectButton('next')->form();
@@ -95,21 +85,10 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 		$this->assertCount(1 + count(Regions::getRegionsForCountry('DE')), $actualRegionOptions);
 
 		// invalid region -> step 2 again
-		if (method_exists($form, 'disableValidation')) {
-			$form->disableValidation();
-			$crawler = $this->client->submit($form, array(
-				'createLocationStep2[region]' => 'INVALID',
-			));
-		} else {
-			// impossible to send invalid values with DomCrawler, see https://github.com/symfony/symfony/issues/7672
-			// TODO remove as soon as Symfony >= 2.4 is required
-			$crawler = $this->client->request($form->getMethod(), $form->getUri(), array(
-				'flow_createLocation_step' => 2,
-				'createLocationStep2' => array(
-					'region' => 'INVALID',
-				),
-			));
-		}
+		$form->disableValidation();
+		$crawler = $this->client->submit($form, array(
+			'createLocationStep2[region]' => 'INVALID',
+		));
 		$this->assertCurrentStepNumber(2, $crawler);
 		$this->assertFieldHasError('#createLocationStep2_region', 'This value is not valid.', $crawler);
 

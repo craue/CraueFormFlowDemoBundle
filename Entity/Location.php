@@ -19,6 +19,7 @@ class Location {
 	 * @var string
 	 * @ORM\Column(name="country", type="string", nullable=false)
 	 * @Assert\NotBlank(groups={"flow_createLocation_step1"})
+	 * @Assert\Country(groups={"flow_createLocation_step1"})
 	 */
 	public $country;
 

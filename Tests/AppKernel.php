@@ -2,8 +2,8 @@
 
 namespace Craue\FormFlowDemoBundle\Tests;
 
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel {
@@ -28,6 +28,7 @@ class AppKernel extends Kernel {
 	public function registerBundles() {
 		return array(
 			new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+			new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
 			new \Symfony\Bundle\TwigBundle\TwigBundle(),
 			new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 			new \Symfony\Bundle\AsseticBundle\AsseticBundle(),

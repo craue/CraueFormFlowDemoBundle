@@ -53,21 +53,10 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 
 		// invalid category -> step 1 again
 		$form = $crawler->selectButton('next')->form();
-		if (method_exists($form, 'disableValidation')) {
-			$form->disableValidation();
-			$crawler = $this->client->submit($form, array(
-				'createTopic[category]' => 'invalid',
-			));
-		} else {
-			// impossible to send invalid values with DomCrawler, see https://github.com/symfony/symfony/issues/7672
-			// TODO remove as soon as Symfony >= 2.4 is required
-			$crawler = $this->client->request($form->getMethod(), $form->getUri(), array(
-				'flow_createVehicle_step' => 1,
-				'createTopic' => array(
-					'category' => 'invalid',
-				),
-			));
-		}
+		$form->disableValidation();
+		$crawler = $this->client->submit($form, array(
+			'createTopic[category]' => 'invalid',
+		));
 		$this->assertCurrentStepNumber(1, $crawler);
 		$this->assertFieldHasError('#createTopic_category', 'This value is not valid.', $crawler);
 
@@ -108,7 +97,7 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 
 	public function testCreateTopic_dynamicStepNavigation() {
 		$this->client->followRedirects();
-		$crawler = $this->client->request('GET', $this->url('_FormFlow_createTopic_dynamicStepNavigation_start'));
+		$crawler = $this->client->request('GET', $this->url('_FormFlow_createTopic_dynamicStepNavigation'));
 
 		$this->assertSame(200, $this->client->getResponse()->getStatusCode());
 		$this->assertCurrentStepNumber(1, $crawler);
@@ -180,6 +169,81 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 			'description' => html_entity_decode('&mdash;', null, 'UTF-8'), // TODO remove last two arguments as soon as PHP >= 5.4 is required
 			'category' => 'discussion',
 			'comment' => 'my comment',
+		), $this->getListContent('', $crawler));
+
+		// finish flow
+		$form = $crawler->selectButton('finish')->form();
+		$this->client->submit($form);
+		$this->assertEquals('_FormFlow_start', $this->client->getRequest()->attributes->get('_route'));
+	}
+
+	public function testCreateTopic_redirectAfterSubmit() {
+		$this->client->followRedirects();
+		$crawler = $this->client->request('GET', $this->url('_FormFlow_createTopic_redirectAfterSubmit'));
+
+		$this->assertSame(200, $this->client->getResponse()->getStatusCode());
+		$this->assertCurrentStepNumber(1, $crawler);
+
+		// reset -> step 1
+		$form = $crawler->selectButton('start over')->form();
+		$crawler = $this->client->submit($form);
+		$this->assertCurrentStepNumber(1, $crawler);
+		$this->assertEquals('GET', $this->client->getRequest()->getMethod());
+
+		// bug report -> step 2
+		$form = $crawler->selectButton('next')->form();
+		$crawler = $this->client->submit($form, array(
+			'createTopic[title]' => 'blah',
+			'createTopic[category]' => 'BUG_REPORT',
+		));
+		$this->assertCurrentStepNumber(2, $crawler);
+		$this->assertEquals('GET', $this->client->getRequest()->getMethod());
+
+		// comment -> step 3
+		$form = $crawler->selectButton('next')->form();
+		$crawler = $this->client->submit($form, array(
+			'createTopic[comment]' => 'my comment',
+		));
+		$this->assertCurrentStepNumber(3, $crawler);
+		$this->assertEquals('GET', $this->client->getRequest()->getMethod());
+
+		// bug details -> step 4
+		$form = $crawler->selectButton('next')->form();
+		$crawler = $this->client->submit($form, array(
+			'createTopic[details]' => 'blah blah',
+		));
+		$this->assertCurrentStepNumber(4, $crawler);
+		$this->assertEquals('GET', $this->client->getRequest()->getMethod());
+
+		$this->assertEquals(array(
+			'title' => 'blah',
+			'description' => html_entity_decode('&mdash;', null, 'UTF-8'), // TODO remove last two arguments as soon as PHP >= 5.4 is required
+			'category' => 'bug report',
+			'comment' => 'my comment',
+			'details' => 'blah blah',
+		), $this->getListContent('', $crawler));
+
+		// go back -> step 3
+		$form = $crawler->selectButton('back')->form();
+		$crawler = $this->client->submit($form);
+		$this->assertCurrentStepNumber(3, $crawler);
+		$this->assertEquals('GET', $this->client->getRequest()->getMethod());
+
+		$form = $crawler->selectButton('next')->form();
+
+		$this->assertEquals('blah blah', $form->get('createTopic[details]')->getValue());
+
+		// bug details -> step 4
+		$crawler = $this->client->submit($form);
+		$this->assertCurrentStepNumber(4, $crawler);
+		$this->assertEquals('GET', $this->client->getRequest()->getMethod());
+
+		$this->assertEquals(array(
+			'title' => 'blah',
+			'description' => html_entity_decode('&mdash;', null, 'UTF-8'), // TODO remove last two arguments as soon as PHP >= 5.4 is required
+			'category' => 'bug report',
+			'comment' => 'my comment',
+			'details' => 'blah blah',
 		), $this->getListContent('', $crawler));
 
 		// finish flow

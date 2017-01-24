@@ -18,6 +18,15 @@ framework:
   validation:
     enable_annotations: true
 
+security:
+  providers:
+    in_memory:
+      memory: ~
+  firewalls:
+    dummy:
+      pattern: .*
+      anonymous: ~
+
 assetic:
   debug: '%kernel.debug%'
   use_controller: false
