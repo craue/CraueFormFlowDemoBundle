@@ -1,0 +1,27 @@
+imports:
+  - { resource: '@CraueFormFlowBundle/Resources/config/form_flow.xml' }
+
+framework:
+  csrf_protection: ~
+  form: ~
+  router:
+    resource: '%kernel.root_dir%/config/routing.yml'
+  secret: whatever
+  session:
+    storage_id: session.storage.mock_file
+  templating:
+    engines:
+      - twig
+  test: ~
+  translator:
+    fallback: en
+  validation:
+    enable_annotations: true
+
+assetic:
+  debug: '%kernel.debug%'
+  use_controller: false
+
+twig:
+  debug: '%kernel.debug%'
+  strict_variables: '%kernel.debug%'
