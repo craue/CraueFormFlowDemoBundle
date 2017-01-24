@@ -1,0 +1,46 @@
+language: php
+
+matrix:
+  include:
+    - php: 5.3.3
+      env: DEPS='lowest'
+    - php: 5.6
+      env: SYMFONY_VERSION='2.3.*' SYMFONY_DEPRECATIONS_HELPER='666'
+    - php: 7.0
+      env: DEPS='unmodified' SYMFONY_DEPRECATIONS_HELPER='666'
+    - php: hhvm
+      env: SYMFONY_VERSION='2.7.*'
+  fast_finish: true
+
+install:
+  # set unlimited memory_limit
+  - if [ "${TRAVIS_PHP_VERSION}" != 'hhvm' ]; then INI_FILE=~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; else INI_FILE=/etc/hhvm/php.ini; fi;
+  - echo "memory_limit = -1" >> "${INI_FILE}"
+  # disable Xdebug for better Composer performance
+  - if [ "${TRAVIS_PHP_VERSION}" != 'hhvm' ]; then mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini xdebug.ini; fi;
+  # install dependencies using Composer
+  - bash .travis_install_dependencies.sh
+
+before_script:
+  - mkdir -p build/logs
+
+script:
+  # enable Xdebug for code coverage analysis
+  - if [ "${TRAVIS_PHP_VERSION}" != 'hhvm' ]; then mv xdebug.ini ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini; fi;
+  # run PHPUnit
+  - vendor/bin/phpunit -v --coverage-clover build/logs/clover.xml
+  # upload code coverage data
+  - if [ "${TRAVIS_PHP_VERSION}" != 'hhvm' ]; then travis_retry wget -q https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar && travis_retry php coveralls.phar -v; fi;
+
+notifications:
+  email:
+    on_success: always
+    on_failure: always
+
+# use container-based infrastructure
+sudo: false
+
+# cache Composer's package cache
+cache:
+  directories:
+    - $HOME/.composer/cache/files

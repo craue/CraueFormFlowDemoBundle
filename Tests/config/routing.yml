@@ -1,0 +1,3 @@
+FormFlowDemo:
+  resource: '@CraueFormFlowDemoBundle/Controller/FormFlowDemoController.php'
+  type: annotation
