@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Vehicle {
 
 	/**
-	 * @var integer
+	 * @var int
 	 * @ORM\Column(name="number_of_wheels", type="integer", nullable=false)
 	 * @Assert\Choice(callback="getValidWheels", groups={"flow_createVehicle_step1"}, strict=true)
 	 * @Assert\NotBlank(groups={"flow_createVehicle_step1"})

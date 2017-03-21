@@ -13,7 +13,7 @@ class CreateVehicle {
 	public $vehicle;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 * @Assert\NotNull(groups={"flow_createVehicle_step3"})
 	 * @Assert\Type(type="boolean", groups={"flow_createVehicle_step3"})
 	 */
