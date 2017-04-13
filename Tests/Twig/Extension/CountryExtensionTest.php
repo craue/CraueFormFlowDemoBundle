@@ -3,6 +3,7 @@
 namespace Craue\FormFlowDemoBundle\Tests\Form;
 
 use Craue\FormFlowDemoBundle\Twig\Extension\CountryExtension;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group unit
@@ -11,7 +12,7 @@ use Craue\FormFlowDemoBundle\Twig\Extension\CountryExtension;
  * @copyright 2011-2017 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class CountryExtensionTest extends \PHPUnit_Framework_TestCase {
+class CountryExtensionTest extends TestCase {
 
 	/**
 	 * @var CountryExtension

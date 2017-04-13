@@ -19,8 +19,8 @@
 		"symfony/symfony": "^2.1.3"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "~4.1|~5.0",
-		"symfony/phpunit-bridge": "~3.2"
+		"phpunit/phpunit": "^4.8.35|~5.7|~6.0",
+		"symfony/phpunit-bridge": "^3.2.5|~3.3@dev"
 	},
 	"minimum-stability": "stable",
 	"autoload": {
