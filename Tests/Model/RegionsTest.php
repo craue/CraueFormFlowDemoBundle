@@ -3,6 +3,7 @@
 namespace Craue\FormFlowDemoBundle\Tests\Model;
 
 use Craue\FormFlowDemoBundle\Model\Regions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group unit
@@ -11,7 +12,7 @@ use Craue\FormFlowDemoBundle\Model\Regions;
  * @copyright 2011-2017 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class RegionsTest extends \PHPUnit_Framework_TestCase {
+class RegionsTest extends TestCase {
 
 	/**
 	 * @dataProvider dataGetRegionsForCountry_validCountry
