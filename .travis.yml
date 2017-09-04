@@ -3,13 +3,13 @@ language: php
 matrix:
   include:
     - php: 5.3
+      dist: precise
       env: DEPS='lowest' SYMFONY_DEPRECATIONS_HELPER='2'
     - php: 5.6
       env: SYMFONY_VERSION='2.7.*'
     - php: 7.1
       env: DEPS='unmodified'
     - php: hhvm
-      dist: trusty
       env: SYMFONY_VERSION='2.7.*'
   fast_finish: true
 
