@@ -7,7 +7,7 @@ matrix:
       env: DEPS='lowest'
     - php: 5.6
       env: SYMFONY_VERSION='2.3.*' SYMFONY_DEPRECATIONS_HELPER='666'
-    - php: 7.1
+    - php: 7.2
       env: DEPS='unmodified' SYMFONY_DEPRECATIONS_HELPER='666'
     - php: hhvm
       env: SYMFONY_VERSION='2.7.*'
