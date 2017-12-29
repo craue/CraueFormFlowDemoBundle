@@ -11,21 +11,25 @@
 	<services>
 		<service id="craueFormFlowDemoBundle.form.flow.createTopic"
 				class="Craue\FormFlowDemoBundle\Form\CreateTopicFlow"
+				public="true"
 				parent="craue.form.flow">
 		</service>
 
 		<service id="craueFormFlowDemoBundle.form.flow.createLocation"
 				class="Craue\FormFlowDemoBundle\Form\CreateLocationFlow"
+				public="true"
 				parent="craue.form.flow">
 		</service>
 
 		<service id="craueFormFlowDemoBundle.form.flow.createVehicle"
 				class="Craue\FormFlowDemoBundle\Form\CreateVehicleFlow"
+				public="true"
 				parent="craue.form.flow">
 		</service>
 
 		<service id="craueFormFlowDemoBundle.form.flow.photoUpload"
 				class="Craue\FormFlowDemoBundle\Form\PhotoUploadFlow"
+				public="true"
 				parent="craue.form.flow">
 		</service>
 	</services>

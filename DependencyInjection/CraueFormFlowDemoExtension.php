@@ -4,8 +4,10 @@ namespace Craue\FormFlowDemoBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * Registration of the extension via DI.
@@ -14,7 +16,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * @copyright 2013-2017 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class CraueFormFlowDemoExtension extends Extension {
+class CraueFormFlowDemoExtension extends Extension implements PrependExtensionInterface {
 
 	/**
 	 * {@inheritDoc}
@@ -24,6 +26,23 @@ class CraueFormFlowDemoExtension extends Extension {
 		$loader->load('form_flow.xml');
 		$loader->load('form_type.xml');
 		$loader->load('twig.xml');
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function prepend(ContainerBuilder $container) {
+		// avoid a deprecation notice regarding logout_on_user_change with Symfony 3.4
+		// TODO remove as soon as Symfony >= 4.0 is required
+		if (Kernel::MAJOR_VERSION === 3 && Kernel::MINOR_VERSION === 4) {
+			$container->prependExtensionConfig('security', array(
+				'firewalls' => array(
+					'dummy' => array(
+						'logout_on_user_change' => true,
+					),
+				),
+			));
+		}
 	}
 
 }
