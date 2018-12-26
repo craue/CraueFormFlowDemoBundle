@@ -3,6 +3,7 @@
 namespace Craue\FormFlowDemoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -18,8 +19,7 @@ class PhotoUploadForm extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		switch ($options['flow_step']) {
 			case 1:
-				$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
-				$builder->add('photo', $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\FileType' : 'file');
+				$builder->add('photo', FileType::class);
 				break;
 			case 2:
 				$builder->add('comment', null, array(
@@ -27,13 +27,6 @@ class PhotoUploadForm extends AbstractType {
 				));
 				break;
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getName() {
-		return $this->getBlockPrefix();
 	}
 
 	/**

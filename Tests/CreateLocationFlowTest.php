@@ -3,7 +3,6 @@
 namespace Craue\FormFlowDemoBundle\Tests;
 
 use Craue\FormFlowDemoBundle\Model\Regions;
-use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @group integration
@@ -40,7 +39,7 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 			'createLocationStep1[country]' => 'INVALID',
 		));
 		$this->assertCurrentStepNumber(1, $crawler);
-		$this->assertFieldHasError('#createLocationStep1_country', Kernel::VERSION_ID < 30200 ? 'This value is not valid.' : 'This value is not a valid country.', $crawler);
+		$this->assertFieldHasError('#createLocationStep1_country', 'This value is not a valid country.', $crawler);
 
 		// country without region -> step 3
 		$form = $crawler->selectButton('next')->form();

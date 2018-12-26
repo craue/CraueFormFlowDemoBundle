@@ -2,8 +2,13 @@
 
 namespace Craue\FormFlowDemoBundle\Form;
 
+use Craue\FormFlowDemoBundle\Entity\Vehicle;
+use Craue\FormFlowDemoBundle\Form\Type\DriverType;
+use Craue\FormFlowDemoBundle\Form\Type\VehicleEngineType;
+use Craue\FormFlowDemoBundle\Form\Type\VehicleWheelsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -17,21 +22,19 @@ class CreateVehicleForm extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
-
 		switch ($options['flow_step']) {
 			case 1:
-				$vehicleForm = $builder->create('vehicle', $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\FormType' : 'form', array(
-					'data_class' => 'Craue\FormFlowDemoBundle\Entity\Vehicle',
+				$vehicleForm = $builder->create('vehicle', FormType::class, array(
+					'data_class' => Vehicle::class,
 				));
-				$vehicleForm->add('numberOfWheels', $useFqcn ? 'Craue\FormFlowDemoBundle\Form\Type\VehicleWheelsType' : 'form_type_vehicleWheels');
+				$vehicleForm->add('numberOfWheels', VehicleWheelsType::class);
 				$builder->add($vehicleForm);
 				break;
 			case 2:
-				$vehicleForm = $builder->create('vehicle', $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\FormType' : 'form', array(
-					'data_class' => 'Craue\FormFlowDemoBundle\Entity\Vehicle',
+				$vehicleForm = $builder->create('vehicle', FormType::class, array(
+					'data_class' => Vehicle::class,
 				));
-				$vehicleForm->add('engine', $useFqcn ? 'Craue\FormFlowDemoBundle\Form\Type\VehicleEngineType' : 'form_type_vehicleEngine');
+				$vehicleForm->add('engine', VehicleEngineType::class);
 				$builder->add($vehicleForm);
 				break;
 			case 3:
@@ -40,7 +43,7 @@ class CreateVehicleForm extends AbstractType {
 				));
 				break;
 			case 4:
-				$builder->add('driver', $useFqcn ? 'Craue\FormFlowDemoBundle\Form\Type\DriverType' : 'form_type_driver');
+				$builder->add('driver', DriverType::class);
 				break;
 		}
 	}
@@ -50,15 +53,8 @@ class CreateVehicleForm extends AbstractType {
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
 		$resolver->setDefaults(array(
-			'data_class' => 'Craue\FormFlowDemoBundle\Form\CreateVehicle',
+			'data_class' => CreateVehicle::class,
 		));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getName() {
-		return $this->getBlockPrefix();
 	}
 
 	/**

@@ -130,7 +130,7 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 
 		$this->assertEquals(array(
 			'title' => 'blah',
-			'description' => html_entity_decode('&mdash;', null, 'UTF-8'), // TODO remove last two arguments as soon as PHP >= 5.4 is required
+			'description' => html_entity_decode('&mdash;'),
 			'category' => 'bug report',
 			'comment' => 'my comment',
 			'details' => 'blah blah',
@@ -166,7 +166,7 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 
 		$this->assertEquals(array(
 			'title' => 'blahhh',
-			'description' => html_entity_decode('&mdash;', null, 'UTF-8'), // TODO remove last two arguments as soon as PHP >= 5.4 is required
+			'description' => html_entity_decode('&mdash;'),
 			'category' => 'discussion',
 			'comment' => 'my comment',
 		), $this->getListContent('', $crawler));
@@ -217,7 +217,7 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 
 		$this->assertEquals(array(
 			'title' => 'blah',
-			'description' => html_entity_decode('&mdash;', null, 'UTF-8'), // TODO remove last two arguments as soon as PHP >= 5.4 is required
+			'description' => html_entity_decode('&mdash;'),
 			'category' => 'bug report',
 			'comment' => 'my comment',
 			'details' => 'blah blah',
@@ -240,7 +240,7 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 
 		$this->assertEquals(array(
 			'title' => 'blah',
-			'description' => html_entity_decode('&mdash;', null, 'UTF-8'), // TODO remove last two arguments as soon as PHP >= 5.4 is required
+			'description' => html_entity_decode('&mdash;'),
 			'category' => 'bug report',
 			'comment' => 'my comment',
 			'details' => 'blah blah',

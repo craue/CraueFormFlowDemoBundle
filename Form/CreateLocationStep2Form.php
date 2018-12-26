@@ -2,6 +2,7 @@
 
 namespace Craue\FormFlowDemoBundle\Form;
 
+use Craue\FormFlowDemoBundle\Form\Type\LocationRegionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,9 +18,7 @@ class CreateLocationStep2Form extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
-
-		$builder->add('region', $useFqcn ? 'Craue\FormFlowDemoBundle\Form\Type\LocationRegionType' : 'form_type_locationRegion', array(
+		$builder->add('region', LocationRegionType::class, array(
 			'country' => $options['country'],
 			'placeholder' => '',
 			'required' => true,
@@ -33,13 +32,6 @@ class CreateLocationStep2Form extends AbstractType {
 		$resolver->setDefaults(array(
 			'country' => null,
 		));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getName() {
-		return $this->getBlockPrefix();
 	}
 
 	/**

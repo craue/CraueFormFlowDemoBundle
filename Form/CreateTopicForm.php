@@ -3,7 +3,9 @@
 namespace Craue\FormFlowDemoBundle\Form;
 
 use Craue\FormFlowDemoBundle\Entity\Topic;
+use Craue\FormFlowDemoBundle\Form\Type\TopicCategoryType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,7 +20,6 @@ class CreateTopicForm extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
 		$isBugReport = $options['isBugReport'];
 
 		switch ($options['flow_step']) {
@@ -27,16 +28,16 @@ class CreateTopicForm extends AbstractType {
 				$builder->add('description', null, array(
 					'required' => false,
 				));
-				$builder->add('category', $useFqcn ? 'Craue\FormFlowDemoBundle\Form\Type\TopicCategoryType' : 'form_type_topicCategory');
+				$builder->add('category', TopicCategoryType::class);
 				break;
 			case 2:
-				$builder->add('comment', $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\TextareaType' : 'textarea', array(
+				$builder->add('comment', TextareaType::class, array(
 					'required' => false,
 				));
 				break;
 			case 3:
 				if ($isBugReport) {
-					$builder->add('details', $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\TextareaType' : 'textarea');
+					$builder->add('details', TextareaType::class);
 				}
 				break;
 		}
@@ -50,13 +51,6 @@ class CreateTopicForm extends AbstractType {
 			'data' => new Topic(),
 			'isBugReport' => false,
 		));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getName() {
-		return $this->getBlockPrefix();
 	}
 
 	/**

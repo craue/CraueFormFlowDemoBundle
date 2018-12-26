@@ -18,16 +18,14 @@ class CreateLocationFlow extends FormFlow {
 	 * {@inheritDoc}
 	 */
 	protected function loadStepsConfig() {
-		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
-
 		return array(
 			array(
 				'label' => 'country',
-				'form_type' => $useFqcn ? 'Craue\FormFlowDemoBundle\Form\CreateLocationStep1Form' : new CreateLocationStep1Form(),
+				'form_type' => CreateLocationStep1Form::class,
 			),
 			array(
 				'label' => 'region',
-				'form_type' => $useFqcn ? 'Craue\FormFlowDemoBundle\Form\CreateLocationStep2Form' : new CreateLocationStep2Form(),
+				'form_type' => CreateLocationStep2Form::class,
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 1 && !$flow->getFormData()->canHaveRegion();
 				},

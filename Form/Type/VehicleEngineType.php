@@ -4,6 +4,7 @@ namespace Craue\FormFlowDemoBundle\Form\Type;
 
 use Craue\FormFlowDemoBundle\Entity\Vehicle;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -28,31 +29,18 @@ class VehicleEngineType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		$useChoicesAsValues = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
-		$setChoicesAsValuesOption = $useChoicesAsValues && method_exists('Symfony\Component\Form\AbstractType', 'getName'); // Symfony's Form component >=2.8 && <3.0
-
 		$defaultOptions = array(
 			'placeholder' => '',
 		);
 
-		if ($setChoicesAsValuesOption) {
-			$defaultOptions['choices_as_values'] = true;
-		}
-
-		$translator = $this->translator;
-		$defaultOptions['choices'] = function(Options $options) use ($translator, $useChoicesAsValues) {
+		$defaultOptions['choices'] = function(Options $options) {
 			$choices = array();
 
 			foreach (Vehicle::getValidEngines() as $value) {
-				$label = $translator->trans($value, array(), 'vehicleEngines');
-				$choices[$useChoicesAsValues ? $label : $value] = $useChoicesAsValues ? $value : $label;
+				$choices[$this->translator->trans($value, array(), 'vehicleEngines')] = $value;
 			}
 
-			if ($useChoicesAsValues) {
-				ksort($choices);
-			} else {
-				asort($choices);
-			}
+			ksort($choices);
 
 			return $choices;
 		};
@@ -64,16 +52,7 @@ class VehicleEngineType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function getParent() {
-		$useFqcn = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix'); // Symfony's Form component >=2.8
-
-		return $useFqcn ? 'Symfony\Component\Form\Extension\Core\Type\ChoiceType' : 'choice';
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getName() {
-		return $this->getBlockPrefix();
+		return ChoiceType::class;
 	}
 
 	/**
