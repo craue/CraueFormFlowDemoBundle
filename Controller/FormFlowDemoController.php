@@ -7,7 +7,7 @@ use Craue\FormFlowDemoBundle\Entity\Location;
 use Craue\FormFlowDemoBundle\Entity\PhotoUpload;
 use Craue\FormFlowDemoBundle\Entity\Topic;
 use Craue\FormFlowDemoBundle\Form\CreateVehicle;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @copyright 2013-2018 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class FormFlowDemoController extends Controller {
+class FormFlowDemoController extends AbstractController {
 
 	/**
 	 * @Route("/", name="_FormFlow_start")

@@ -23,6 +23,7 @@ class CraueFormFlowDemoExtension extends Extension implements PrependExtensionIn
 	 */
 	public function load(array $config, ContainerBuilder $container) {
 		$loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+		$loader->load('controller.xml');
 		$loader->load('form_flow.xml');
 		$loader->load('form_type.xml');
 		$loader->load('twig.xml');
