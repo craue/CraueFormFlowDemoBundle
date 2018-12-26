@@ -45,15 +45,15 @@ class PhotoUploadFlowTest extends IntegrationTestCase {
 
 		// comment -> step 3
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'photoUpload[comment]' => 'blah',
-		));
+		]);
 		$this->assertCurrentStepNumber(3, $crawler);
 
-		$this->assertEquals(array(
+		$this->assertEquals([
 			'photo' => '',
 			'comment' => 'blah',
-		), $this->getListContent('', $crawler));
+		], $this->getListContent('', $crawler));
 		$this->assertImageSrc('img', sprintf('data:image/png;base64,%s', base64_encode(file_get_contents($image))), $crawler);
 
 		// finish flow

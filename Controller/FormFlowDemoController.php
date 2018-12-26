@@ -108,11 +108,11 @@ class FormFlowDemoController extends AbstractController {
 			return $this->redirect($this->generateUrl($request->attributes->get('_route'), $params));
 		}
 
-		return $this->render($template, array(
+		return $this->render($template, [
 			'form' => $form->createView(),
 			'flow' => $flow,
 			'formData' => $formData,
-		));
+		]);
 	}
 
 }

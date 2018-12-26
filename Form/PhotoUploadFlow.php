@@ -17,20 +17,20 @@ class PhotoUploadFlow extends FormFlow {
 	protected function loadStepsConfig() {
 		$formType = PhotoUploadForm::class;
 
-		return array(
-			array(
+		return [
+			[
 				'label' => 'photo_select',
 				'form_type' => $formType,
-			),
-			array(
+			],
+			[
 				'label' => 'photo_comment',
 				'form_type' => $formType,
-			),
-			array(
+			],
+			[
 				'label' => 'confirmation',
 				'form_type' => $formType,
-			),
-		);
+			],
+		];
 	}
 
 }

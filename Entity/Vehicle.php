@@ -42,18 +42,18 @@ class Vehicle {
 	}
 
 	public static function getValidWheels() {
-		return array(
+		return [
 			2,
 			4,
-		);
+		];
 	}
 
 	public static function getValidEngines() {
-		return array(
+		return [
 			'ELECTRIC',
 			'GAS',
 			'NATURAL_GAS',
-		);
+		];
 	}
 
 }

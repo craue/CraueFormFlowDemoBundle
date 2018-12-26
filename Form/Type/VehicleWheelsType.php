@@ -20,10 +20,10 @@ class VehicleWheelsType extends AbstractType {
 	public function configureOptions(OptionsResolver $resolver) {
 		$validValues = Vehicle::getValidWheels();
 
-		$defaultOptions = array(
+		$defaultOptions = [
 			'choices' => array_combine($validValues, $validValues),
 			'placeholder' => '',
-		);
+		];
 
 		$resolver->setDefaults($defaultOptions);
 	}

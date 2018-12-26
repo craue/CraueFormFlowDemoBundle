@@ -22,9 +22,9 @@ class PhotoUploadForm extends AbstractType {
 				$builder->add('photo', FileType::class);
 				break;
 			case 2:
-				$builder->add('comment', null, array(
+				$builder->add('comment', null, [
 					'required' => false,
-				));
+				]);
 				break;
 		}
 	}

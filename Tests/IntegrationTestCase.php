@@ -21,7 +21,7 @@ abstract class IntegrationTestCase extends WebTestCase {
 	/**
 	 * {@inheritDoc}
 	 */
-	protected static function createKernel(array $options = array()) {
+	protected static function createKernel(array $options = []) {
 		$configFile = isset($options['config']) ? $options['config'] : 'config.yml';
 
 		return new AppKernel($configFile);
@@ -39,7 +39,7 @@ abstract class IntegrationTestCase extends WebTestCase {
 	 * @param array $parameters
 	 * @return string URL
 	 */
-	protected function url($route, array $parameters = array()) {
+	protected function url($route, array $parameters = []) {
 		return static::$kernel->getContainer()->get('router')->generate($route, $parameters);
 	}
 
@@ -50,7 +50,7 @@ abstract class IntegrationTestCase extends WebTestCase {
 	 * @param string $locale
 	 * @return string Text
 	 */
-	protected function trans($id, array $parameters = array(), $domain = 'messages', $locale = 'en') {
+	protected function trans($id, array $parameters = [], $domain = 'messages', $locale = 'en') {
 		return static::$kernel->getContainer()->get('translator')->trans($id, $parameters, $domain, $locale);
 	}
 
@@ -101,10 +101,10 @@ abstract class IntegrationTestCase extends WebTestCase {
 	 */
 	protected function getOptionsOfSelectField($fieldSelector, Crawler $crawler) {
 		return $crawler->filter('select' . $fieldSelector . ' option')->each(function(Crawler $node, $i) {
-			return array(
+			return [
 				'value' => $node->attr('value'),
 				'label' => $node->text(),
-			);
+			];
 		});
 	}
 

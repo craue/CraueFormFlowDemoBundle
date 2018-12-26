@@ -12,7 +12,7 @@ abstract class Regions {
 	public static function getRegionsForCountry($country) {
 		switch ($country) {
 			case 'AT':
-				return array(
+				return [
 					// source: http://de.wikipedia.org/wiki/ISO_3166-2:AT
 					'AT-1',
 					'AT-2',
@@ -23,9 +23,9 @@ abstract class Regions {
 					'AT-7',
 					'AT-8',
 					'AT-9',
-				);
+				];
 			case 'CH':
-				return array(
+				return [
 					// source: http://de.wikipedia.org/wiki/ISO_3166-2:CH
 					'CH-AG',
 					'CH-AR',
@@ -53,9 +53,9 @@ abstract class Regions {
 					'CH-VS',
 					'CH-ZG',
 					'CH-ZH',
-				);
+				];
 			case 'DE':
-				return array(
+				return [
 					// source: http://de.wikipedia.org/wiki/ISO_3166-2:DE
 					'DE-BW',
 					'DE-BY',
@@ -73,9 +73,9 @@ abstract class Regions {
 					'DE-ST',
 					'DE-SH',
 					'DE-TH',
-				);
+				];
 			case 'US':
-				return array(
+				return [
 					// source: http://de.wikipedia.org/wiki/Bundesstaat_der_Vereinigten_Staaten
 					'US-AL',
 					'US-AK',
@@ -127,9 +127,9 @@ abstract class Regions {
 					'US-WV',
 					'US-WI',
 					'US-WY',
-				);
+				];
 			default:
-				return array();
+				return [];
 		}
 	}
 

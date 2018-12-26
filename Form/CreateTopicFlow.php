@@ -20,32 +20,32 @@ class CreateTopicFlow extends FormFlow {
 	protected function loadStepsConfig() {
 		$formType = CreateTopicForm::class;
 
-		return array(
-			array(
+		return [
+			[
 				'label' => 'basics',
 				'form_type' => $formType,
-			),
-			array(
+			],
+			[
 				'label' => 'comment',
 				'form_type' => $formType,
-			),
-			array(
+			],
+			[
 				'label' => 'bug_details',
 				'form_type' => $formType,
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 1 && !$flow->getFormData()->isBugReport();
 				},
-			),
-			array(
+			],
+			[
 				'label' => 'confirmation',
-			),
-		);
+			],
+		];
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFormOptions($step, array $options = array()) {
+	public function getFormOptions($step, array $options = []) {
 		$options = parent::getFormOptions($step, $options);
 
 		if ($step === 3) {

@@ -26,27 +26,27 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertEquals('', $form->get('createTopic[description]')->getValue());
 		$this->assertEquals('', $form->get('createTopic[category]')->getValue());
 
-		$expectedOptionsCategory = array(
-			array(
+		$expectedOptionsCategory = [
+			[
 				'value' => '',
 				'label' => '',
-			)
-		);
+			]
+		];
 		$validCategories = Topic::getValidCategories();
 		sort($validCategories);
 		foreach ($validCategories as $category) {
-			$expectedOptionsCategory[] = array(
+			$expectedOptionsCategory[] = [
 				'value' => $category,
-				'label' => $this->trans($category, array(), 'topicCategories'),
-			);
+				'label' => $this->trans($category, [], 'topicCategories'),
+			];
 		}
 		$this->assertEquals($expectedOptionsCategory, $this->getOptionsOfSelectField('#createTopic_category', $crawler));
 
 		// empty fields -> step 1 again
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[title]' => '',
 			'createTopic[category]' => '',
-		));
+		]);
 		$this->assertCurrentStepNumber(1, $crawler);
 		$this->assertFieldHasError('#createTopic_title', 'This value should not be blank.', $crawler);
 		$this->assertFieldHasError('#createTopic_category', 'This value should not be blank.', $crawler);
@@ -54,39 +54,39 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		// invalid category -> step 1 again
 		$form = $crawler->selectButton('next')->form();
 		$form->disableValidation();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[category]' => 'invalid',
-		));
+		]);
 		$this->assertCurrentStepNumber(1, $crawler);
 		$this->assertFieldHasError('#createTopic_category', 'This value is not valid.', $crawler);
 
 		// bug report -> step 2
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[title]' => 'blah',
 			'createTopic[category]' => 'BUG_REPORT',
-		));
+		]);
 		$this->assertCurrentStepNumber(2, $crawler);
 
 		// next -> step 3
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[comment]' => '',
-		));
+		]);
 		$this->assertCurrentStepNumber(3, $crawler);
 
 		// empty field -> step 3 again
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[details]' => '',
-		));
+		]);
 		$this->assertCurrentStepNumber(3, $crawler);
 		$this->assertFieldHasError('#createTopic_details', 'This value should not be blank.', $crawler);
 
 		// bug details -> step 4
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[details]' => 'blah blah',
-		));
+		]);
 		$this->assertCurrentStepNumber(4, $crawler);
 
 		// finish flow
@@ -105,36 +105,36 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 
 		// bug report -> step 2
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[title]' => 'blah',
 			'createTopic[category]' => 'BUG_REPORT',
-		));
+		]);
 		$this->assertCurrentStepNumber(2, $crawler);
 		$this->assertCount(1, $crawler->filter('.flow-steps a'));
 
 		// comment -> step 3
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[comment]' => 'my comment',
-		));
+		]);
 		$this->assertCurrentStepNumber(3, $crawler);
 		$this->assertCount(2, $crawler->filter('.flow-steps a'));
 
 		// bug details -> step 4
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[details]' => 'blah blah',
-		));
+		]);
 		$this->assertCurrentStepNumber(4, $crawler);
 		$this->assertCount(3, $crawler->filter('.flow-steps a'));
 
-		$this->assertEquals(array(
+		$this->assertEquals([
 			'title' => 'blah',
 			'description' => html_entity_decode('&mdash;'),
 			'category' => 'bug report',
 			'comment' => 'my comment',
 			'details' => 'blah blah',
-		), $this->getListContent('', $crawler));
+		], $this->getListContent('', $crawler));
 
 		// back to step 1 via DSN
 		$linkToStep1 = $crawler->filter('.flow-steps a')->selectLink('basics')->link()->getUri();
@@ -148,10 +148,10 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertEquals('BUG_REPORT', $form->get('createTopic[category]')->getValue());
 
 		// discussion -> step 2
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[title]' => 'blahhh',
 			'createTopic[category]' => 'DISCUSSION',
-		));
+		]);
 		$this->assertCurrentStepNumber(2, $crawler);
 		$this->assertCount(2, $crawler->filter('.flow-steps a')); // link the last step as it's been visited already
 
@@ -164,12 +164,12 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertCurrentStepNumber(4, $crawler);
 		$this->assertCount(2, $crawler->filter('.flow-steps a'));
 
-		$this->assertEquals(array(
+		$this->assertEquals([
 			'title' => 'blahhh',
 			'description' => html_entity_decode('&mdash;'),
 			'category' => 'discussion',
 			'comment' => 'my comment',
-		), $this->getListContent('', $crawler));
+		], $this->getListContent('', $crawler));
 
 		// finish flow
 		$form = $crawler->selectButton('finish')->form();
@@ -192,36 +192,36 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 
 		// bug report -> step 2
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[title]' => 'blah',
 			'createTopic[category]' => 'BUG_REPORT',
-		));
+		]);
 		$this->assertCurrentStepNumber(2, $crawler);
 		$this->assertEquals('GET', $this->client->getRequest()->getMethod());
 
 		// comment -> step 3
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[comment]' => 'my comment',
-		));
+		]);
 		$this->assertCurrentStepNumber(3, $crawler);
 		$this->assertEquals('GET', $this->client->getRequest()->getMethod());
 
 		// bug details -> step 4
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createTopic[details]' => 'blah blah',
-		));
+		]);
 		$this->assertCurrentStepNumber(4, $crawler);
 		$this->assertEquals('GET', $this->client->getRequest()->getMethod());
 
-		$this->assertEquals(array(
+		$this->assertEquals([
 			'title' => 'blah',
 			'description' => html_entity_decode('&mdash;'),
 			'category' => 'bug report',
 			'comment' => 'my comment',
 			'details' => 'blah blah',
-		), $this->getListContent('', $crawler));
+		], $this->getListContent('', $crawler));
 
 		// go back -> step 3
 		$form = $crawler->selectButton('back')->form();
@@ -238,13 +238,13 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 		$this->assertCurrentStepNumber(4, $crawler);
 		$this->assertEquals('GET', $this->client->getRequest()->getMethod());
 
-		$this->assertEquals(array(
+		$this->assertEquals([
 			'title' => 'blah',
 			'description' => html_entity_decode('&mdash;'),
 			'category' => 'bug report',
 			'comment' => 'my comment',
 			'details' => 'blah blah',
-		), $this->getListContent('', $crawler));
+		], $this->getListContent('', $crawler));
 
 		// finish flow
 		$form = $crawler->selectButton('finish')->form();

@@ -29,15 +29,15 @@ class VehicleEngineType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		$defaultOptions = array(
+		$defaultOptions = [
 			'placeholder' => '',
-		);
+		];
 
 		$defaultOptions['choices'] = function(Options $options) {
-			$choices = array();
+			$choices = [];
 
 			foreach (Vehicle::getValidEngines() as $value) {
-				$choices[$this->translator->trans($value, array(), 'vehicleEngines')] = $value;
+				$choices[$this->translator->trans($value, [], 'vehicleEngines')] = $value;
 			}
 
 			ksort($choices);

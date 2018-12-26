@@ -24,33 +24,33 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 
 		$this->assertEquals('', $form->get('createVehicle[vehicle][numberOfWheels]')->getValue());
 
-		$expectedOptionsNumberOfWheels = array(
-			array(
+		$expectedOptionsNumberOfWheels = [
+			[
 				'value' => '',
 				'label' => '',
-			)
-		);
+			]
+		];
 		foreach (Vehicle::getValidWheels() as $wheels) {
-			$expectedOptionsNumberOfWheels[] = array(
+			$expectedOptionsNumberOfWheels[] = [
 				'value' => $wheels,
 				'label' => $wheels,
-			);
+			];
 		}
 		$this->assertEquals($expectedOptionsNumberOfWheels, $this->getOptionsOfSelectField('#createVehicle_vehicle_numberOfWheels', $crawler));
 
 		// invalid number of wheels -> step 1 again
 		$form->disableValidation();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createVehicle[vehicle][numberOfWheels]' => 99,
-		));
+		]);
 		$this->assertCurrentStepNumber(1, $crawler);
 		$this->assertFieldHasError('#createVehicle_vehicle_numberOfWheels', 'This value is not valid.', $crawler);
 
 		// 2 wheels -> step 3
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createVehicle[vehicle][numberOfWheels]' => 2,
-		));
+		]);
 		$this->assertCurrentStepNumber(3, $crawler);
 
 		$form = $crawler->selectButton('back')->form();
@@ -66,44 +66,44 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 		$this->assertEquals('2', $form->get('createVehicle[vehicle][numberOfWheels]')->getValue());
 
 		// 4 wheels -> step 2
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createVehicle[vehicle][numberOfWheels]' => 4,
-		));
+		]);
 		$this->assertCurrentStepNumber(2, $crawler);
 
 		$form = $crawler->selectButton('next')->form();
 
 		$this->assertEquals('', $form->get('createVehicle[vehicle][engine]')->getValue());
 
-		$expectedOptionsEngine = array(
-			array(
+		$expectedOptionsEngine = [
+			[
 				'value' => '',
 				'label' => '',
-			)
-		);
+			]
+		];
 		$validEngines = Vehicle::getValidEngines();
 		sort($validEngines);
 		foreach ($validEngines as $engine) {
-			$expectedOptionsEngine[] = array(
+			$expectedOptionsEngine[] = [
 				'value' => $engine,
-				'label' => $this->trans($engine, array(), 'vehicleEngines'),
-			);
+				'label' => $this->trans($engine, [], 'vehicleEngines'),
+			];
 		}
 		$this->assertEquals($expectedOptionsEngine, $this->getOptionsOfSelectField('#createVehicle_vehicle_engine', $crawler));
 
 		// invalid engine -> step 2 again
 		$form->disableValidation();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createVehicle[vehicle][engine]' => 'magic',
-		));
+		]);
 		$this->assertCurrentStepNumber(2, $crawler);
 		$this->assertFieldHasError('#createVehicle_vehicle_engine', 'This value is not valid.', $crawler);
 
 		// engine -> step 3
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createVehicle[vehicle][engine]' => 'GAS',
-		));
+		]);
 		$this->assertCurrentStepNumber(3, $crawler);
 
 		$form = $crawler->selectButton('next')->form();
@@ -117,10 +117,10 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 
 		$form = $crawler->selectButton('back')->form();
 
-		$this->assertEquals(array(
+		$this->assertEquals([
 			'wheels' => '4',
 			'engine' => 'gas engine',
-		), $this->getListContent('', $crawler));
+		], $this->getListContent('', $crawler));
 
 		// go back -> step 3
 		$crawler = $this->client->submit($form);
@@ -141,20 +141,20 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 		$this->assertEquals('', $form->get('createVehicle[driver][lastname]')->getValue());
 
 		// empty fields -> step 4 again
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createVehicle[driver][firstname]' => '',
 			'createVehicle[driver][lastname]' => '',
-		));
+		]);
 		$this->assertCurrentStepNumber(4, $crawler);
 		$this->assertFieldHasError('#createVehicle_driver_firstname', 'This value should not be blank.', $crawler);
 		$this->assertFieldHasError('#createVehicle_driver_lastname', 'This value should not be blank.', $crawler);
 
 		// driver details -> step 5
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, array(
+		$crawler = $this->client->submit($form, [
 			'createVehicle[driver][firstname]' => 'First',
 			'createVehicle[driver][lastname]' => 'Last',
-		));
+		]);
 		$this->assertCurrentStepNumber(5, $crawler);
 
 		// finish flow

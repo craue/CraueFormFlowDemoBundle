@@ -22,12 +22,12 @@ class RegionsTest extends TestCase {
 	}
 
 	public function dataGetRegionsForCountry_validCountry() {
-		return array(
-			array('AT'),
-			array('CH'),
-			array('DE'),
-			array('US'),
-		);
+		return [
+			['AT'],
+			['CH'],
+			['DE'],
+			['US'],
+		];
 	}
 
 	/**
@@ -38,9 +38,9 @@ class RegionsTest extends TestCase {
 	}
 
 	public function dataGetRegionsForCountry_invalidCountry() {
-		return array(
-			array('INVALID'),
-		);
+		return [
+			['INVALID'],
+		];
 	}
 
 }

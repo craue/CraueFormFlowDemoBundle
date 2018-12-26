@@ -29,16 +29,16 @@ class LocationRegionType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		$defaultOptions = array(
+		$defaultOptions = [
 			'country' => null,
 			'placeholder' => '',
-		);
+		];
 
 		$defaultOptions['choices'] = function(Options $options) {
-			$choices = array();
+			$choices = [];
 
 			foreach (Regions::getRegionsForCountry($options['country']) as $value) {
-				$choices[$this->translator->trans($value, array(), 'locationRegions')] = $value;
+				$choices[$this->translator->trans($value, [], 'locationRegions')] = $value;
 			}
 
 			ksort($choices);

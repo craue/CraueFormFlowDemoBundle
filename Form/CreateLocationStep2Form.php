@@ -18,20 +18,20 @@ class CreateLocationStep2Form extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder->add('region', LocationRegionType::class, array(
+		$builder->add('region', LocationRegionType::class, [
 			'country' => $options['country'],
 			'placeholder' => '',
 			'required' => true,
-		));
+		]);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'country' => null,
-		));
+		]);
 	}
 
 	/**

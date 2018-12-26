@@ -33,12 +33,12 @@ class CountryExtensionTest extends TestCase {
 	}
 
 	public function dataGetCountry() {
-		return array(
-			array(null, null),
-			array(null, ''),
-			array(null, 'INVALID'),
-			array('Germany', 'DE'),
-		);
+		return [
+			[null, null],
+			[null, ''],
+			[null, 'INVALID'],
+			['Germany', 'DE'],
+		];
 	}
 
 }

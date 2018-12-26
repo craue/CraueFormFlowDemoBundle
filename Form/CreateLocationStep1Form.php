@@ -17,12 +17,12 @@ class CreateLocationStep1Form extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder->add('country', CountryType::class, array(
+		$builder->add('country', CountryType::class, [
 			'placeholder' => '',
-			'preferred_choices' => array(
+			'preferred_choices' => [
 				'AT', 'CH', 'DE', 'US',
-			),
-		));
+			],
+		]);
 	}
 
 	/**

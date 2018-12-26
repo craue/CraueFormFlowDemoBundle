@@ -29,15 +29,15 @@ class TopicCategoryType extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		$defaultOptions = array(
+		$defaultOptions = [
 			'placeholder' => '',
-		);
+		];
 
 		$defaultOptions['choices'] = function(Options $options) {
-			$choices = array();
+			$choices = [];
 
 			foreach (Topic::getValidCategories() as $value) {
-				$choices[$this->translator->trans($value, array(), 'topicCategories')] = $value;
+				$choices[$this->translator->trans($value, [], 'topicCategories')] = $value;
 			}
 
 			ksort($choices);

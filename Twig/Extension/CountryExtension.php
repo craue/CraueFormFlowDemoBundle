@@ -15,9 +15,9 @@ class CountryExtension extends \Twig_Extension {
 	 * {@inheritDoc}
 	 */
 	public function getFunctions() {
-		return array(
-			new \Twig_SimpleFunction('country', array($this, 'getCountry')),
-		);
+		return [
+			new \Twig_SimpleFunction('country', [$this, 'getCountry']),
+		];
 	}
 
 	/**

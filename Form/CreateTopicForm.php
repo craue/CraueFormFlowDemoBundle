@@ -25,15 +25,15 @@ class CreateTopicForm extends AbstractType {
 		switch ($options['flow_step']) {
 			case 1:
 				$builder->add('title');
-				$builder->add('description', null, array(
+				$builder->add('description', null, [
 					'required' => false,
-				));
+				]);
 				$builder->add('category', TopicCategoryType::class);
 				break;
 			case 2:
-				$builder->add('comment', TextareaType::class, array(
+				$builder->add('comment', TextareaType::class, [
 					'required' => false,
-				));
+				]);
 				break;
 			case 3:
 				if ($isBugReport) {
@@ -47,10 +47,10 @@ class CreateTopicForm extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data' => new Topic(),
 			'isBugReport' => false,
-		));
+		]);
 	}
 
 	/**

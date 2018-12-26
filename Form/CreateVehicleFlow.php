@@ -31,9 +31,9 @@ class CreateVehicleFlow extends FormFlow implements EventSubscriberInterface {
 	 * {@inheritDoc}
 	 */
 	public static function getSubscribedEvents() {
-		return array(
+		return [
 			FormFlowEvents::POST_BIND_SAVED_DATA => 'onPostBindSavedData',
-		);
+		];
 	}
 
 	public function onPostBindSavedData(PostBindSavedDataEvent $event) {
@@ -53,33 +53,33 @@ class CreateVehicleFlow extends FormFlow implements EventSubscriberInterface {
 	protected function loadStepsConfig() {
 		$formType = CreateVehicleForm::class;
 
-		return array(
-			array(
+		return [
+			[
 				'label' => 'wheels',
 				'form_type' => $formType,
-			),
-			array(
+			],
+			[
 				'label' => 'engine',
 				'form_type' => $formType,
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 1 && !$flow->getFormData()->vehicle->canHaveEngine();
 				},
-			),
-			array(
+			],
+			[
 				'label' => 'driver',
 				'form_type' => $formType,
-			),
-			array(
+			],
+			[
 				'label' => 'driverDetails',
 				'form_type' => $formType,
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 3 && !$flow->getFormData()->addDriver;
 				},
-			),
-			array(
+			],
+			[
 				'label' => 'confirmation',
-			),
-		);
+			],
+		];
 	}
 
 }

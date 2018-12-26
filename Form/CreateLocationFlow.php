@@ -18,28 +18,28 @@ class CreateLocationFlow extends FormFlow {
 	 * {@inheritDoc}
 	 */
 	protected function loadStepsConfig() {
-		return array(
-			array(
+		return [
+			[
 				'label' => 'country',
 				'form_type' => CreateLocationStep1Form::class,
-			),
-			array(
+			],
+			[
 				'label' => 'region',
 				'form_type' => CreateLocationStep2Form::class,
 				'skip' => function($estimatedCurrentStepNumber, FormFlowInterface $flow) {
 					return $estimatedCurrentStepNumber > 1 && !$flow->getFormData()->canHaveRegion();
 				},
-			),
-			array(
+			],
+			[
 				'label' => 'confirmation',
-			),
-		);
+			],
+		];
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFormOptions($step, array $options = array()) {
+	public function getFormOptions($step, array $options = []) {
 		$options = parent::getFormOptions($step, $options);
 
 		if ($step === 2) {

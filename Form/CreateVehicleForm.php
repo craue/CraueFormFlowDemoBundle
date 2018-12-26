@@ -24,23 +24,23 @@ class CreateVehicleForm extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		switch ($options['flow_step']) {
 			case 1:
-				$vehicleForm = $builder->create('vehicle', FormType::class, array(
+				$vehicleForm = $builder->create('vehicle', FormType::class, [
 					'data_class' => Vehicle::class,
-				));
+				]);
 				$vehicleForm->add('numberOfWheels', VehicleWheelsType::class);
 				$builder->add($vehicleForm);
 				break;
 			case 2:
-				$vehicleForm = $builder->create('vehicle', FormType::class, array(
+				$vehicleForm = $builder->create('vehicle', FormType::class, [
 					'data_class' => Vehicle::class,
-				));
+				]);
 				$vehicleForm->add('engine', VehicleEngineType::class);
 				$builder->add($vehicleForm);
 				break;
 			case 3:
-				$builder->add('addDriver', null, array(
+				$builder->add('addDriver', null, [
 					'required' => false,
-				));
+				]);
 				break;
 			case 4:
 				$builder->add('driver', DriverType::class);
@@ -52,9 +52,9 @@ class CreateVehicleForm extends AbstractType {
 	 * {@inheritDoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => CreateVehicle::class,
-		));
+		]);
 	}
 
 	/**
