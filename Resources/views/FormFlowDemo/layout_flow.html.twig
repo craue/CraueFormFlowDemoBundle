@@ -3,14 +3,8 @@
 {% block stylesheets %}
 	{{ parent() }}
 
-	{% stylesheets
-		'@CraueFormFlowBundle/Resources/assets/css/buttons.css'
-		'@CraueFormFlowDemoBundle/Resources/assets/css/form-flow.css'
-		filter='?yui_css'
-		output='css/form-flow.css'
-	%}
-		<link type="text/css" rel="stylesheet" href="{{ asset_url }}" />
-	{% endstylesheets %}
+	<link type="text/css" rel="stylesheet" href="{{ asset('bundles/craueformflow/css/buttons.css') }}" />
+	<link type="text/css" rel="stylesheet" href="{{ asset('bundles/craueformflowdemo/css/form-flow.css') }}" />
 {% endblock %}
 
 {% block content %}

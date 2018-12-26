@@ -30,7 +30,6 @@ class AppKernel extends Kernel {
 			new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
 			new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
 			new \Symfony\Bundle\TwigBundle\TwigBundle(),
-			new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
 			new \Craue\FormFlowBundle\CraueFormFlowBundle(),
 			new \Craue\FormFlowDemoBundle\CraueFormFlowDemoBundle(),
 		);

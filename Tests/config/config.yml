@@ -27,10 +27,6 @@ security:
       pattern: .*
       anonymous: ~
 
-assetic:
-  debug: '%kernel.debug%'
-  use_controller: false
-
 twig:
   debug: '%kernel.debug%'
   strict_variables: '%kernel.debug%'
