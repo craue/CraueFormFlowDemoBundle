@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2013-2018 Christian Raue
+ * @copyright 2013-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class Driver {
