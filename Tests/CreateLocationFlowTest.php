@@ -39,7 +39,12 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 			'createLocationStep1[country]' => 'INVALID',
 		]);
 		$this->assertCurrentStepNumber(1, $crawler);
-		$this->assertFieldHasError('#createLocationStep1_country', 'This value is not a valid country.', $crawler);
+		try {
+			$this->assertFieldHasError('#createLocationStep1_country', 'This value is not valid.', $crawler);
+		} catch (\PHPUnit\Framework\ExpectationFailedException $e) {
+			// TODO remove as soon as Symfony >= 3.4.21, >= 4.1.10, >= 4.2.2 is required
+			$this->assertFieldHasError('#createLocationStep1_country', 'This value is not a valid country.', $crawler);
+		}
 
 		// country without region -> step 3
 		$form = $crawler->selectButton('next')->form();
