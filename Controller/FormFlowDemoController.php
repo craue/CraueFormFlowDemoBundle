@@ -6,7 +6,11 @@ use Craue\FormFlowBundle\Form\FormFlowInterface;
 use Craue\FormFlowDemoBundle\Entity\Location;
 use Craue\FormFlowDemoBundle\Entity\PhotoUpload;
 use Craue\FormFlowDemoBundle\Entity\Topic;
+use Craue\FormFlowDemoBundle\Form\CreateLocationFlow;
+use Craue\FormFlowDemoBundle\Form\CreateTopicFlow;
 use Craue\FormFlowDemoBundle\Form\CreateVehicle;
+use Craue\FormFlowDemoBundle\Form\CreateVehicleFlow;
+use Craue\FormFlowDemoBundle\Form\PhotoUploadFlow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -29,32 +33,31 @@ class FormFlowDemoController extends AbstractController {
 	/**
 	 * @Route("/create-location/", name="_FormFlow_createLocation")
 	 */
-	public function createLocationAction() {
-		return $this->processFlow(new Location(), $this->get('craueFormFlowDemoBundle.form.flow.createLocation'),
+	public function createLocationAction(CreateLocationFlow $flow) {
+		return $this->processFlow(new Location(), $flow,
 				'@CraueFormFlowDemo/FormFlowDemo/createLocation.html.twig');
 	}
 
 	/**
 	 * @Route("/create-vehicle/", name="_FormFlow_createVehicle")
 	 */
-	public function createVehicleAction() {
-		return $this->processFlow(new CreateVehicle(), $this->get('craueFormFlowDemoBundle.form.flow.createVehicle'),
+	public function createVehicleAction(CreateVehicleFlow $flow) {
+		return $this->processFlow(new CreateVehicle(), $flow,
 				'@CraueFormFlowDemo/FormFlowDemo/createVehicle.html.twig');
 	}
 
 	/**
 	 * @Route("/create-topic/", name="_FormFlow_createTopic")
 	 */
-	public function createTopicAction() {
-		return $this->processFlow(new Topic(), $this->get('craueFormFlowDemoBundle.form.flow.createTopic'),
+	public function createTopicAction(CreateTopicFlow $flow) {
+		return $this->processFlow(new Topic(), $flow,
 				'@CraueFormFlowDemo/FormFlowDemo/createTopic.html.twig');
 	}
 
 	/**
 	 * @Route("/create-topic-dsn/", name="_FormFlow_createTopic_dynamicStepNavigation")
 	 */
-	public function createTopicWithDynamicStepNavigationAction() {
-		$flow = $this->get('craueFormFlowDemoBundle.form.flow.createTopic');
+	public function createTopicWithDynamicStepNavigationAction(CreateTopicFlow $flow) {
 		$flow->setAllowDynamicStepNavigation(true);
 
 		return $this->processFlow(new Topic(), $flow,
@@ -64,8 +67,7 @@ class FormFlowDemoController extends AbstractController {
 	/**
 	 * @Route("/create-topic-redirect-after-submit/", name="_FormFlow_createTopic_redirectAfterSubmit")
 	 */
-	public function createTopicWithRedirectAfterSubmitAction() {
-		$flow = $this->get('craueFormFlowDemoBundle.form.flow.createTopic');
+	public function createTopicWithRedirectAfterSubmitAction(CreateTopicFlow $flow) {
 		$flow->setAllowRedirectAfterSubmit(true);
 
 		return $this->processFlow(new Topic(), $flow,
@@ -75,8 +77,8 @@ class FormFlowDemoController extends AbstractController {
 	/**
 	 * @Route("/photo-upload/", name="_FormFlow_photoUpload")
 	 */
-	public function photoUploadAction() {
-		return $this->processFlow(new PhotoUpload(), $this->get('craueFormFlowDemoBundle.form.flow.photoUpload'),
+	public function photoUploadAction(PhotoUploadFlow $flow) {
+		return $this->processFlow(new PhotoUpload(), $flow,
 				'@CraueFormFlowDemo/FormFlowDemo/photoUpload.html.twig');
 	}
 

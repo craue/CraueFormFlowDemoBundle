@@ -21,6 +21,9 @@ class VehicleEngineType extends AbstractType {
 	 */
 	protected $translator;
 
+	/**
+	 * @required
+	 */
 	public function setTranslator(TranslatorInterface $translator) {
 		$this->translator = $translator;
 	}
