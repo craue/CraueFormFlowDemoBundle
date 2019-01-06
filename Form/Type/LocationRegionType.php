@@ -33,6 +33,7 @@ class LocationRegionType extends AbstractType {
 	 */
 	public function configureOptions(OptionsResolver $resolver) {
 		$defaultOptions = [
+			'choice_translation_domain' => false,
 			'country' => null,
 			'placeholder' => '',
 		];

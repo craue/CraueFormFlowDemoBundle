@@ -21,6 +21,7 @@ class VehicleWheelsType extends AbstractType {
 		$validValues = Vehicle::getValidWheels();
 
 		$defaultOptions = [
+			'choice_translation_domain' => false,
 			'choices' => array_combine($validValues, $validValues),
 			'placeholder' => '',
 		];

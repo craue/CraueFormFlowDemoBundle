@@ -20,7 +20,6 @@ class CreateLocationStep2Form extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder->add('region', LocationRegionType::class, [
 			'country' => $options['country'],
-			'placeholder' => '',
 			'required' => true,
 		]);
 	}
