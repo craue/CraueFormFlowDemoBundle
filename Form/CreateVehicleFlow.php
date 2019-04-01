@@ -7,7 +7,6 @@ use Craue\FormFlowBundle\Form\FormFlow;
 use Craue\FormFlowBundle\Form\FormFlowEvents;
 use Craue\FormFlowBundle\Form\FormFlowInterface;
 use Craue\FormFlowDemoBundle\Entity\Driver;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -18,14 +17,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class CreateVehicleFlow extends FormFlow implements EventSubscriberInterface {
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function setEventDispatcher(EventDispatcherInterface $dispatcher) {
-		parent::setEventDispatcher($dispatcher);
-		$dispatcher->addSubscriber($this);
-	}
 
 	/**
 	 * {@inheritDoc}
