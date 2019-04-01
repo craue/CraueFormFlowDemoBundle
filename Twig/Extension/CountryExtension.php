@@ -3,20 +3,22 @@
 namespace Craue\FormFlowDemoBundle\Twig\Extension;
 
 use Symfony\Component\Intl\Intl;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2013-2019 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-class CountryExtension extends \Twig_Extension {
+class CountryExtension extends AbstractExtension {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getFunctions() {
 		return [
-			new \Twig_SimpleFunction('country', [$this, 'getCountry']),
+			new TwigFunction('country', [$this, 'getCountry']),
 		];
 	}
 
