@@ -20,7 +20,7 @@ class CreateLocationStep1Form extends AbstractType {
 		$builder->add('country', CountryType::class, [
 			'placeholder' => '',
 			'preferred_choices' => [
-				'AT', 'CH', 'DE', 'US',
+				'AT', 'DE', 'CH', 'US',
 			],
 		]);
 	}

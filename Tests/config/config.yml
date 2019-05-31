@@ -2,6 +2,7 @@ imports:
   - { resource: '@CraueFormFlowBundle/Resources/config/form_flow.xml' }
 
 framework:
+  assets: ~
   csrf_protection: ~
   form: ~
   router:
@@ -9,9 +10,6 @@ framework:
   secret: whatever
   session:
     storage_id: session.storage.mock_file
-  templating:
-    engines:
-      - twig
   test: ~
   translator:
     fallback: en
