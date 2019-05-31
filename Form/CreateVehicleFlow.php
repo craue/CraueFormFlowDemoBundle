@@ -28,6 +28,10 @@ class CreateVehicleFlow extends FormFlow implements EventSubscriberInterface {
 	}
 
 	public function onPostBindSavedData(PostBindSavedDataEvent $event) {
+		if ($event->getFlow() !== $this) {
+			return;
+		}
+
 		if ($event->getStepNumber() === 3) {
 			$formData = $event->getFormData();
 
