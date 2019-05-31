@@ -3,6 +3,7 @@
 namespace Craue\FormFlowDemoBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -14,9 +15,9 @@ use Symfony\Component\DomCrawler\Crawler;
 abstract class IntegrationTestCase extends WebTestCase {
 
 	/**
-	 * @var Client
+	 * @var Client|KernelBrowser|null
 	 */
-	protected $client;
+	protected static $client;
 
 	/**
 	 * {@inheritDoc}
@@ -31,7 +32,7 @@ abstract class IntegrationTestCase extends WebTestCase {
 	 * {@inheritDoc}
 	 */
 	protected function setUp() {
-		$this->client = static::createClient();
+		static::$client = static::createClient();
 	}
 
 	/**
@@ -136,7 +137,7 @@ abstract class IntegrationTestCase extends WebTestCase {
 		try {
 			return $crawler->filter($selector)->attr($attribute);
 		} catch (\InvalidArgumentException $e) {
-			$this->fail(sprintf("No node found for selector '%s'. Content:\n%s", $selector, $this->client->getResponse()->getContent()));
+			$this->fail(sprintf("No node found for selector '%s'. Content:\n%s", $selector, static::$client->getResponse()->getContent()));
 		}
 	}
 
@@ -148,7 +149,7 @@ abstract class IntegrationTestCase extends WebTestCase {
 		try {
 			return $crawler->filter($selector)->text();
 		} catch (\InvalidArgumentException $e) {
-			$this->fail(sprintf("No node found for selector '%s'. Content:\n%s", $selector, $this->client->getResponse()->getContent()));
+			$this->fail(sprintf("No node found for selector '%s'. Content:\n%s", $selector, static::$client->getResponse()->getContent()));
 		}
 	}
 

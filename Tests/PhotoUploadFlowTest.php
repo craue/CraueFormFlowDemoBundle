@@ -18,34 +18,34 @@ class PhotoUploadFlowTest extends IntegrationTestCase {
 		$document = __DIR__ . self::DOCUMENT;
 		$image = __DIR__ . self::IMAGE;
 
-		$this->client->followRedirects();
-		$crawler = $this->client->request('GET', $this->url('_FormFlow_photoUpload'));
+		static::$client->followRedirects();
+		$crawler = static::$client->request('GET', $this->url('_FormFlow_photoUpload'));
 
-		$this->assertSame(200, $this->client->getResponse()->getStatusCode());
+		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
 		$this->assertCurrentStepNumber(1, $crawler);
 
 		// don't upload any file -> step 1
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form);
+		$crawler = static::$client->submit($form);
 		$this->assertCurrentStepNumber(1, $crawler);
 		$this->assertFieldHasError('#photoUpload_photo', 'This value should not be null.', $crawler);
 
 		// try uploading non-image file -> step 1
 		$form = $crawler->selectButton('next')->form();
 		$form['photoUpload[photo]']->upload($document);
-		$crawler = $this->client->submit($form);
+		$crawler = static::$client->submit($form);
 		$this->assertCurrentStepNumber(1, $crawler);
 		$this->assertFieldHasError('#photoUpload_photo', 'This file is not a valid image.', $crawler);
 
 		// upload the photo -> step 2
 		$form = $crawler->selectButton('next')->form();
 		$form['photoUpload[photo]']->upload($image);
-		$crawler = $this->client->submit($form);
+		$crawler = static::$client->submit($form);
 		$this->assertCurrentStepNumber(2, $crawler);
 
 		// comment -> step 3
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, [
+		$crawler = static::$client->submit($form, [
 			'photoUpload[comment]' => 'blah',
 		]);
 		$this->assertCurrentStepNumber(3, $crawler);
@@ -58,8 +58,8 @@ class PhotoUploadFlowTest extends IntegrationTestCase {
 
 		// finish flow
 		$form = $crawler->selectButton('finish')->form();
-		$this->client->submit($form);
-		$this->assertEquals('_FormFlow_start', $this->client->getRequest()->attributes->get('_route'));
+		static::$client->submit($form);
+		$this->assertEquals('_FormFlow_start', static::$client->getRequest()->attributes->get('_route'));
 	}
 
 }

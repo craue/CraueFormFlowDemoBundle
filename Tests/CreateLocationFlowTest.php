@@ -14,10 +14,10 @@ use Craue\FormFlowDemoBundle\Model\Regions;
 class CreateLocationFlowTest extends IntegrationTestCase {
 
 	public function testCreateLocation() {
-		$this->client->followRedirects();
-		$crawler = $this->client->request('GET', $this->url('_FormFlow_createLocation'));
+		static::$client->followRedirects();
+		$crawler = static::$client->request('GET', $this->url('_FormFlow_createLocation'));
 
-		$this->assertSame(200, $this->client->getResponse()->getStatusCode());
+		$this->assertSame(200, static::$client->getResponse()->getStatusCode());
 		$this->assertCurrentStepNumber(1, $crawler);
 
 		$form = $crawler->selectButton('next')->form();
@@ -35,7 +35,7 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 
 		// invalid country -> step 1 again
 		$form->disableValidation();
-		$crawler = $this->client->submit($form, [
+		$crawler = static::$client->submit($form, [
 			'createLocationStep1[country]' => 'INVALID',
 		]);
 		$this->assertCurrentStepNumber(1, $crawler);
@@ -48,7 +48,7 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 
 		// country without region -> step 3
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, [
+		$crawler = static::$client->submit($form, [
 			'createLocationStep1[country]' => 'AX',
 		]);
 		$this->assertCurrentStepNumber(3, $crawler);
@@ -60,7 +60,7 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 		$form = $crawler->selectButton('back')->form();
 
 		// go back -> step 1
-		$crawler = $this->client->submit($form);
+		$crawler = static::$client->submit($form);
 		$this->assertCurrentStepNumber(1, $crawler);
 
 		$form = $crawler->selectButton('next')->form();
@@ -68,7 +68,7 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 		$this->assertEquals('AX', $form->get('createLocationStep1[country]')->getValue());
 
 		// country with region -> step 2
-		$crawler = $this->client->submit($form, [
+		$crawler = static::$client->submit($form, [
 			'createLocationStep1[country]' => 'DE',
 		]);
 		$this->assertCurrentStepNumber(2, $crawler);
@@ -90,7 +90,7 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 
 		// invalid region -> step 2 again
 		$form->disableValidation();
-		$crawler = $this->client->submit($form, [
+		$crawler = static::$client->submit($form, [
 			'createLocationStep2[region]' => 'INVALID',
 		]);
 		$this->assertCurrentStepNumber(2, $crawler);
@@ -98,7 +98,7 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 
 		// region -> step 3
 		$form = $crawler->selectButton('next')->form();
-		$crawler = $this->client->submit($form, [
+		$crawler = static::$client->submit($form, [
 			'createLocationStep2[region]' => 'DE-BE',
 		]);
 		$this->assertCurrentStepNumber(3, $crawler);
@@ -110,8 +110,8 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 
 		// finish flow
 		$form = $crawler->selectButton('finish')->form();
-		$this->client->submit($form);
-		$this->assertEquals('_FormFlow_start', $this->client->getRequest()->attributes->get('_route'));
+		static::$client->submit($form);
+		$this->assertEquals('_FormFlow_start', static::$client->getRequest()->attributes->get('_route'));
 	}
 
 }
