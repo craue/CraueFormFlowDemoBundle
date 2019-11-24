@@ -7,26 +7,18 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Translation\TranslatorInterface as LegacyTranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2013-2019 Christian Raue
- * @license http://opensource.org/licenses/mit-license.php MIT License
+ * @internal
  */
-class LocationRegionType extends AbstractType {
+abstract class BaseLocationRegionType extends AbstractType {
 
 	/**
-	 * @var TranslatorInterface
+	 * @var TranslatorInterface|LegacyTranslatorInterface
 	 */
 	protected $translator;
-
-	/**
-	 * @required
-	 */
-	public function setTranslator(TranslatorInterface $translator) {
-		$this->translator = $translator;
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -67,4 +59,35 @@ class LocationRegionType extends AbstractType {
 		return 'form_type_locationRegion';
 	}
 
+}
+
+// TODO revert to one clean class definition as soon as Symfony >= 4.2 is required
+if (interface_exists(TranslatorInterface::class)) {
+	/**
+	 * @author Christian Raue <christian.raue@gmail.com>
+	 * @copyright 2013-2019 Christian Raue
+	 * @license http://opensource.org/licenses/mit-license.php MIT License
+	 */
+	class LocationRegionType extends BaseLocationRegionType {
+		/**
+		 * @required
+		 */
+		public function setTranslator(TranslatorInterface $translator) {
+			$this->translator = $translator;
+		}
+	}
+} else {
+	/**
+	 * @author Christian Raue <christian.raue@gmail.com>
+	 * @copyright 2013-2019 Christian Raue
+	 * @license http://opensource.org/licenses/mit-license.php MIT License
+	 */
+	class LocationRegionType extends BaseLocationRegionType {
+		/**
+		 * @required
+		 */
+		public function setTranslator(LegacyTranslatorInterface $translator) {
+			$this->translator = $translator;
+		}
+	}
 }
