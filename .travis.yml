@@ -6,6 +6,9 @@ matrix:
       env: DEPS='lowest'
     - php: 7.3
       env: SYMFONY_VERSION='3.4.*'
+    # TODO remove as soon as Symfony >= 4.2 is required
+    - php: 7.3
+      env: SYMFONY_VERSION='3.4.*' WITH_TRANSLATION_CONTRACTS='yes'
     - php: 7.3
       env: SYMFONY_VERSION='4.4.*'
     - php: 7.3

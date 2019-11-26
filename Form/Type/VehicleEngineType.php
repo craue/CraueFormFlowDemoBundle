@@ -61,7 +61,7 @@ abstract class BaseVehicleEngineType extends AbstractType {
 }
 
 // TODO revert to one clean class definition as soon as Symfony >= 4.2 is required
-if (interface_exists(TranslatorInterface::class)) {
+if (!interface_exists(LegacyTranslatorInterface::class)) {
 	/**
 	 * @author Christian Raue <christian.raue@gmail.com>
 	 * @copyright 2013-2019 Christian Raue

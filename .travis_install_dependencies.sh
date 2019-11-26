@@ -22,4 +22,9 @@ case "${DEPS:-}" in
 		fi
 esac
 
+# TODO remove as soon as Symfony >= 4.2 is required
+if [ -n "${WITH_TRANSLATION_CONTRACTS:-}" ]; then
+	composer require --no-update --dev "symfony/translation-contracts:~1.1"
+fi
+
 composer update ${COMPOSER_UPDATE_ARGS:-}
