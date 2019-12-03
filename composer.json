@@ -2,7 +2,7 @@
 	"name": "craue/formflow-demo-bundle",
 	"type": "symfony-bundle",
 	"description": "Example code showcasing the features of CraueFormFlowBundle.",
-	"keywords": ["form", "wizard", "step", "demo", "symfony3", "symfony4"],
+	"keywords": ["form", "wizard", "step", "demo", "symfony3", "symfony4","symfony5"],
 	"homepage": "https://github.com/craue/CraueFormFlowDemoBundle",
 	"license": "MIT",
 	"authors": [
@@ -12,14 +12,14 @@
 		}
 	],
 	"require": {
-		"craue/formflow-bundle": "~3.2@dev",
+		"craue/formflow-bundle": "~3.3",
 		"doctrine/orm": "^2.5.2",
-		"symfony/symfony": "~3.4|~4.1"
+		"symfony/symfony": "~3.4|~4.1|~5.0"
 	},
 	"require-dev": {
 		"doctrine/instantiator": "^1.0.5",
 		"phpunit/phpunit": "^6.5.13|^7.5.1",
-		"symfony/phpunit-bridge": "~3.4|~4.1"
+		"symfony/phpunit-bridge": "~3.4|~4.1|~5.0"
 	},
 	"minimum-stability": "stable",
 	"autoload": {
