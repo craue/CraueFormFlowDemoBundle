@@ -1,6 +1,5 @@
 {
 	"name": "craue/formflow-demo-bundle",
-	"type": "symfony-bundle",
 	"description": "Example code showcasing the features of CraueFormFlowBundle.",
 	"keywords": ["form", "wizard", "step", "demo", "symfony"],
 	"homepage": "https://github.com/craue/CraueFormFlowDemoBundle",
