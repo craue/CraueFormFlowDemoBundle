@@ -64,7 +64,7 @@ abstract class BaseVehicleEngineType extends AbstractType {
 if (!interface_exists(LegacyTranslatorInterface::class)) {
 	/**
 	 * @author Christian Raue <christian.raue@gmail.com>
-	 * @copyright 2013-2019 Christian Raue
+	 * @copyright 2013-2020 Christian Raue
 	 * @license http://opensource.org/licenses/mit-license.php MIT License
 	 */
 	class VehicleEngineType extends BaseVehicleEngineType {
@@ -78,7 +78,7 @@ if (!interface_exists(LegacyTranslatorInterface::class)) {
 } else {
 	/**
 	 * @author Christian Raue <christian.raue@gmail.com>
-	 * @copyright 2013-2019 Christian Raue
+	 * @copyright 2013-2020 Christian Raue
 	 * @license http://opensource.org/licenses/mit-license.php MIT License
 	 */
 	class VehicleEngineType extends BaseVehicleEngineType {

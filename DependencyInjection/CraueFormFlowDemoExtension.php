@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Kernel;
  * Registration of the extension via DI.
  *
  * @author Christian Raue <christian.raue@gmail.com>
- * @copyright 2013-2019 Christian Raue
+ * @copyright 2013-2020 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class CraueFormFlowDemoExtension extends Extension implements PrependExtensionInterface {
