@@ -3,7 +3,7 @@ form_field_required: required field
 step: step
 steps: steps
 code_available_at: The source code of this demo is available at %url%.
-data_usage_notice: The data entered here is only stored in the session temporarily. It will neither be persisted to a database nor used in any other kind.
+data_usage_notice: For demonstration purposes, the data entered here is stored temporarily in the session only. It will neither be persisted to a database nor used in any other kind.
 
 # headlines
 formFlow.demo: CraueFormFlowBundle demo
