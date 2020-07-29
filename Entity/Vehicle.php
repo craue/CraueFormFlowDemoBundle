@@ -7,12 +7,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="craue_formflowdemo_verhicle")
  *
  * @author Christian Raue <christian.raue@gmail.com>
  * @copyright 2013-2020 Christian Raue
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 class Vehicle {
+
+	use EntityHasIdTrait;
 
 	/**
 	 * @var int
