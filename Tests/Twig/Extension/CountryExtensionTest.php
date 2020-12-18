@@ -19,7 +19,7 @@ class CountryExtensionTest extends TestCase {
 	 */
 	protected $ext;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		\Locale::setDefault('en');
 
 		 $this->ext = new CountryExtension();

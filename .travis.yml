@@ -2,16 +2,16 @@ language: php
 
 matrix:
   include:
-    - php: 7.0
+    - php: 7.3
       env: DEPS='lowest'
-    - php: 7.3
-      env: SYMFONY_VERSION='3.4.*' SYMFONY_DEPRECATIONS_HELPER='max[self]=0&max[direct]=0&max[indirect]=1'
-    # TODO remove as soon as Symfony >= 4.2 is required
-    - php: 7.3
-      env: SYMFONY_VERSION='3.4.*' WITH_TRANSLATION_CONTRACTS='yes' SYMFONY_DEPRECATIONS_HELPER='max[self]=0&max[direct]=0&max[indirect]=1'
-    - php: 7.3
-      env: SYMFONY_VERSION='4.4.*'
     - php: 7.4
+      env: SYMFONY_VERSION='3.4.*'
+    # TODO remove as soon as Symfony >= 4.2 is required
+    - php: 7.4
+      env: SYMFONY_VERSION='3.4.*' WITH_TRANSLATION_CONTRACTS='yes'
+    - php: 7.4
+      env: SYMFONY_VERSION='4.4.*'
+    - php: 8.0
       env: DEPS='unmodified'
   fast_finish: true
 
