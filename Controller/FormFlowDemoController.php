@@ -12,7 +12,9 @@ use Craue\FormFlowDemoBundle\Form\CreateVehicle;
 use Craue\FormFlowDemoBundle\Form\CreateVehicleFlow;
 use Craue\FormFlowDemoBundle\Form\PhotoUploadFlow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 /**
  * @Route("/CraueFormFlow")
@@ -24,10 +26,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class FormFlowDemoController extends AbstractController {
 
 	/**
+	 * @var Environment
+	 */
+	private $twig;
+
+	public function __construct(Environment $twig) {
+		$this->twig = $twig;
+	}
+
+	/**
 	 * @Route("/", name="_FormFlow_start")
 	 */
 	public function indexAction() {
-		return $this->render('@CraueFormFlowDemo/FormFlowDemo/index.html.twig');
+		return new Response($this->twig->render('@CraueFormFlowDemo/FormFlowDemo/index.html.twig'));
 	}
 
 	/**
@@ -110,11 +121,11 @@ class FormFlowDemoController extends AbstractController {
 			return $this->redirect($this->generateUrl($request->attributes->get('_route'), $params));
 		}
 
-		return $this->render($template, [
+		return new Response($this->twig->render($template, [
 			'form' => $form->createView(),
 			'flow' => $flow,
 			'formData' => $formData,
-		]);
+		]));
 	}
 
 }
