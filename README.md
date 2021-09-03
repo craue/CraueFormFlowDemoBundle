@@ -1,7 +1,7 @@
 # Information
 
-[![Build Status](https://travis-ci.org/craue/CraueFormFlowDemoBundle.svg?branch=3.5.x)](https://travis-ci.org/craue/CraueFormFlowDemoBundle)
-[![Coverage Status](https://coveralls.io/repos/github/craue/CraueFormFlowDemoBundle/badge.svg?branch=3.5.x)](https://coveralls.io/github/craue/CraueFormFlowDemoBundle?branch=3.5.x)
+[![Build Status](https://app.travis-ci.com/craue/CraueFormFlowDemoBundle.svg?branch=3.6.x)](https://app.travis-ci.com/craue/CraueFormFlowDemoBundle)
+[![Coverage Status](https://coveralls.io/repos/github/craue/CraueFormFlowDemoBundle/badge.svg?branch=3.6.x)](https://coveralls.io/github/craue/CraueFormFlowDemoBundle?branch=3.6.x)
 
 CraueFormFlowDemoBundle contains the code used by http://craue.de/symfony-playground/en/CraueFormFlow/, a live demo
 showcasing the features of [CraueFormFlowBundle](https://github.com/craue/CraueFormFlowBundle).
