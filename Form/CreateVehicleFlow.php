@@ -21,7 +21,7 @@ class CreateVehicleFlow extends FormFlow implements EventSubscriberInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public static function getSubscribedEvents() {
+	public static function getSubscribedEvents() : array {
 		return [
 			FormFlowEvents::POST_BIND_SAVED_DATA => 'onPostBindSavedData',
 		];

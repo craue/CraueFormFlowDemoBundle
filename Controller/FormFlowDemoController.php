@@ -3,6 +3,7 @@
 namespace Craue\FormFlowDemoBundle\Controller;
 
 use Craue\FormFlowBundle\Form\FormFlowInterface;
+use Craue\FormFlowBundle\Util\FormFlowUtil;
 use Craue\FormFlowDemoBundle\Entity\Location;
 use Craue\FormFlowDemoBundle\Entity\PhotoUpload;
 use Craue\FormFlowDemoBundle\Entity\Topic;
@@ -12,6 +13,7 @@ use Craue\FormFlowDemoBundle\Form\CreateVehicle;
 use Craue\FormFlowDemoBundle\Form\CreateVehicleFlow;
 use Craue\FormFlowDemoBundle\Form\PhotoUploadFlow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
@@ -26,11 +28,17 @@ use Twig\Environment;
 class FormFlowDemoController extends AbstractController {
 
 	/**
+	 * @var FormFlowUtil
+	 */
+	private $formFlowUtil;
+
+	/**
 	 * @var Environment
 	 */
 	private $twig;
 
-	public function __construct(Environment $twig) {
+	public function __construct(FormFlowUtil $formFlowUtil, Environment $twig) {
+		$this->formFlowUtil = $formFlowUtil;
 		$this->twig = $twig;
 	}
 
@@ -44,56 +52,56 @@ class FormFlowDemoController extends AbstractController {
 	/**
 	 * @Route("/create-location/", name="_FormFlow_createLocation")
 	 */
-	public function createLocationAction(CreateLocationFlow $flow) {
-		return $this->processFlow(new Location(), $flow,
+	public function createLocationAction(Request $request, CreateLocationFlow $flow) {
+		return $this->processFlow($request, new Location(), $flow,
 				'@CraueFormFlowDemo/FormFlowDemo/createLocation.html.twig');
 	}
 
 	/**
 	 * @Route("/create-vehicle/", name="_FormFlow_createVehicle")
 	 */
-	public function createVehicleAction(CreateVehicleFlow $flow) {
-		return $this->processFlow(new CreateVehicle(), $flow,
+	public function createVehicleAction(Request $request, CreateVehicleFlow $flow) {
+		return $this->processFlow($request, new CreateVehicle(), $flow,
 				'@CraueFormFlowDemo/FormFlowDemo/createVehicle.html.twig');
 	}
 
 	/**
 	 * @Route("/create-topic/", name="_FormFlow_createTopic")
 	 */
-	public function createTopicAction(CreateTopicFlow $flow) {
-		return $this->processFlow(new Topic(), $flow,
+	public function createTopicAction(Request $request, CreateTopicFlow $flow) {
+		return $this->processFlow($request, new Topic(), $flow,
 				'@CraueFormFlowDemo/FormFlowDemo/createTopic.html.twig');
 	}
 
 	/**
 	 * @Route("/create-topic-dsn/", name="_FormFlow_createTopic_dynamicStepNavigation")
 	 */
-	public function createTopicWithDynamicStepNavigationAction(CreateTopicFlow $flow) {
+	public function createTopicWithDynamicStepNavigationAction(Request $request, CreateTopicFlow $flow) {
 		$flow->setAllowDynamicStepNavigation(true);
 
-		return $this->processFlow(new Topic(), $flow,
+		return $this->processFlow($request, new Topic(), $flow,
 				'@CraueFormFlowDemo/FormFlowDemo/createTopicWithDynamicStepNavigation.html.twig');
 	}
 
 	/**
 	 * @Route("/create-topic-redirect-after-submit/", name="_FormFlow_createTopic_redirectAfterSubmit")
 	 */
-	public function createTopicWithRedirectAfterSubmitAction(CreateTopicFlow $flow) {
+	public function createTopicWithRedirectAfterSubmitAction(Request $request, CreateTopicFlow $flow) {
 		$flow->setAllowRedirectAfterSubmit(true);
 
-		return $this->processFlow(new Topic(), $flow,
+		return $this->processFlow($request, new Topic(), $flow,
 				'@CraueFormFlowDemo/FormFlowDemo/createTopicWithRedirectAfterSubmit.html.twig');
 	}
 
 	/**
 	 * @Route("/photo-upload/", name="_FormFlow_photoUpload")
 	 */
-	public function photoUploadAction(PhotoUploadFlow $flow) {
-		return $this->processFlow(new PhotoUpload(), $flow,
+	public function photoUploadAction(Request $request, PhotoUploadFlow $flow) {
+		return $this->processFlow($request, new PhotoUpload(), $flow,
 				'@CraueFormFlowDemo/FormFlowDemo/photoUpload.html.twig');
 	}
 
-	protected function processFlow($formData, FormFlowInterface $flow, $template) {
+	protected function processFlow(Request $request, $formData, FormFlowInterface $flow, $template) {
 		$flow->bind($formData);
 
 		$form = $submittedForm = $flow->createForm();
@@ -114,8 +122,7 @@ class FormFlowDemoController extends AbstractController {
 		}
 
 		if ($flow->redirectAfterSubmit($submittedForm)) {
-			$request = $this->get('request_stack')->getCurrentRequest();
-			$params = $this->get('craue_formflow_util')->addRouteParameters(array_merge($request->query->all(),
+			$params = $this->formFlowUtil->addRouteParameters(array_merge($request->query->all(),
 					$request->attributes->get('_route_params')), $flow);
 
 			return $this->redirect($this->generateUrl($request->attributes->get('_route'), $params));

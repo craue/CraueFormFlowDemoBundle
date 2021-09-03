@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @author Christian Raue <christian.raue@gmail.com>
@@ -22,7 +23,7 @@ abstract class IntegrationTestCase extends WebTestCase {
 	/**
 	 * {@inheritDoc}
 	 */
-	protected static function createKernel(array $options = []) {
+	protected static function createKernel(array $options = []) : KernelInterface {
 		$configFile = isset($options['config']) ? $options['config'] : 'config.yml';
 
 		return new AppKernel($configFile);

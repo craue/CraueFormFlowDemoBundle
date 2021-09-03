@@ -28,7 +28,7 @@ class CreateLocationStep1Form extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getBlockPrefix() {
+	public function getBlockPrefix() : string {
 		return 'createLocationStep1';
 	}
 

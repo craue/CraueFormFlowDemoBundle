@@ -34,7 +34,7 @@ class DriverType extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getBlockPrefix() {
+	public function getBlockPrefix() : string {
 		return 'form_type_driver';
 	}
 

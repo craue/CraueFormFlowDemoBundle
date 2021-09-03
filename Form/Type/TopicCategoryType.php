@@ -47,14 +47,14 @@ abstract class BaseTopicCategoryType extends AbstractType {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getParent() {
+	public function getParent() : ?string {
 		return ChoiceType::class;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getBlockPrefix() {
+	public function getBlockPrefix() : string {
 		return 'form_type_topicCategory';
 	}
 
