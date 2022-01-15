@@ -58,7 +58,12 @@ class CreateTopicFlowTest extends IntegrationTestCase {
 			'createTopic[category]' => 'invalid',
 		]);
 		$this->assertCurrentStepNumber(1, $crawler);
-		$this->assertFieldHasError('#createTopic_category', 'This value is not valid.', $crawler);
+		try {
+			$this->assertFieldHasError('#createTopic_category', 'The selected choice is invalid.', $crawler);
+		} catch (\PHPUnit\Framework\ExpectationFailedException $e) {
+			// TODO remove as soon as Symfony >= 6.0 is required
+			$this->assertFieldHasError('#createTopic_category', 'This value is not valid.', $crawler);
+		}
 
 		// bug report -> step 2
 		$crawler = static::$client->submit($form, [

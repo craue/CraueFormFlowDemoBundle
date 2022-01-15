@@ -3,7 +3,6 @@
 namespace Craue\FormFlowDemoBundle\Twig\Extension;
 
 use Symfony\Component\Intl\Countries;
-use Symfony\Component\Intl\Intl;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -37,11 +36,6 @@ class CountryExtension extends AbstractExtension {
 	public function getCountry($key) {
 		if (empty($key)) {
 			return null;
-		}
-
-		// TODO remove as soon as Symfony >= 4.3 is required
-		if (!class_exists('Symfony\Component\Intl\Countries')) {
-			return Intl::getRegionBundle()->getCountryName($key, \Locale::getDefault());
 		}
 
 		return Countries::exists($key) ? Countries::getName($key, \Locale::getDefault()) : null;

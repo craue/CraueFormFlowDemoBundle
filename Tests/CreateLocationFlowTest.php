@@ -40,10 +40,10 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 		]);
 		$this->assertCurrentStepNumber(1, $crawler);
 		try {
-			$this->assertFieldHasError('#createLocationStep1_country', 'This value is not valid.', $crawler);
+			$this->assertFieldHasError('#createLocationStep1_country', 'Please select a valid country.', $crawler);
 		} catch (\PHPUnit\Framework\ExpectationFailedException $e) {
-			// TODO remove as soon as Symfony >= 3.4.21, >= 4.1.10, >= 4.2.2 is required
-			$this->assertFieldHasError('#createLocationStep1_country', 'This value is not a valid country.', $crawler);
+			// TODO remove as soon as Symfony >= 6.0 is required
+			$this->assertFieldHasError('#createLocationStep1_country', 'This value is not valid.', $crawler);
 		}
 
 		// country without region -> step 3
@@ -94,7 +94,12 @@ class CreateLocationFlowTest extends IntegrationTestCase {
 			'createLocationStep2[region]' => 'INVALID',
 		]);
 		$this->assertCurrentStepNumber(2, $crawler);
-		$this->assertFieldHasError('#createLocationStep2_region', 'This value is not valid.', $crawler);
+		try {
+			$this->assertFieldHasError('#createLocationStep2_region', 'The selected choice is invalid.', $crawler);
+		} catch (\PHPUnit\Framework\ExpectationFailedException $e) {
+			// TODO remove as soon as Symfony >= 6.0 is required
+			$this->assertFieldHasError('#createLocationStep2_region', 'This value is not valid.', $crawler);
+		}
 
 		// region -> step 3
 		$form = $crawler->selectButton('next')->form();

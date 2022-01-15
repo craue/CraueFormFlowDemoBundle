@@ -44,7 +44,12 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 			'createVehicle[vehicle][numberOfWheels]' => 99,
 		]);
 		$this->assertCurrentStepNumber(1, $crawler);
-		$this->assertFieldHasError('#createVehicle_vehicle_numberOfWheels', 'This value is not valid.', $crawler);
+		try {
+			$this->assertFieldHasError('#createVehicle_vehicle_numberOfWheels', 'The selected choice is invalid.', $crawler);
+		} catch (\PHPUnit\Framework\ExpectationFailedException $e) {
+			// TODO remove as soon as Symfony >= 6.0 is required
+			$this->assertFieldHasError('#createVehicle_vehicle_numberOfWheels', 'This value is not valid.', $crawler);
+		}
 
 		// 2 wheels -> step 3
 		$form = $crawler->selectButton('next')->form();
@@ -97,7 +102,12 @@ class CreateVehicleFlowTest extends IntegrationTestCase {
 			'createVehicle[vehicle][engine]' => 'magic',
 		]);
 		$this->assertCurrentStepNumber(2, $crawler);
-		$this->assertFieldHasError('#createVehicle_vehicle_engine', 'This value is not valid.', $crawler);
+		try {
+			$this->assertFieldHasError('#createVehicle_vehicle_engine', 'The selected choice is invalid.', $crawler);
+		} catch (\PHPUnit\Framework\ExpectationFailedException $e) {
+			// TODO remove as soon as Symfony >= 6.0 is required
+			$this->assertFieldHasError('#createVehicle_vehicle_engine', 'This value is not valid.', $crawler);
+		}
 
 		// engine -> step 3
 		$form = $crawler->selectButton('next')->form();

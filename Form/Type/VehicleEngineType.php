@@ -7,18 +7,26 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Translation\TranslatorInterface as LegacyTranslatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @internal
+ * @author Christian Raue <christian.raue@gmail.com>
+ * @copyright 2013-2022 Christian Raue
+ * @license http://opensource.org/licenses/mit-license.php MIT License
  */
-abstract class BaseVehicleEngineType extends AbstractType {
+class VehicleEngineType extends AbstractType {
 
 	/**
-	 * @var TranslatorInterface|LegacyTranslatorInterface
+	 * @var TranslatorInterface
 	 */
 	protected $translator;
+
+	/**
+	 * @required
+	 */
+	public function setTranslator(TranslatorInterface $translator) {
+		$this->translator = $translator;
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -58,35 +66,4 @@ abstract class BaseVehicleEngineType extends AbstractType {
 		return 'form_type_vehicleEngine';
 	}
 
-}
-
-// TODO revert to one clean class definition as soon as Symfony >= 4.2 is required
-if (!interface_exists(LegacyTranslatorInterface::class)) {
-	/**
-	 * @author Christian Raue <christian.raue@gmail.com>
-	 * @copyright 2013-2022 Christian Raue
-	 * @license http://opensource.org/licenses/mit-license.php MIT License
-	 */
-	class VehicleEngineType extends BaseVehicleEngineType {
-		/**
-		 * @required
-		 */
-		public function setTranslator(TranslatorInterface $translator) {
-			$this->translator = $translator;
-		}
-	}
-} else {
-	/**
-	 * @author Christian Raue <christian.raue@gmail.com>
-	 * @copyright 2013-2022 Christian Raue
-	 * @license http://opensource.org/licenses/mit-license.php MIT License
-	 */
-	class VehicleEngineType extends BaseVehicleEngineType {
-		/**
-		 * @required
-		 */
-		public function setTranslator(LegacyTranslatorInterface $translator) {
-			$this->translator = $translator;
-		}
-	}
 }
